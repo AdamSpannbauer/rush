@@ -1,0 +1,27 @@
+{
+  "name": "rush",
+  "version": "1.0.0",
+  "description": "Maybe eventually an in browser mini game rush game",
+  "main": "sketch.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AdamSpannbauer/rush.git"
+  },
+  "author": "Adam Spannbauer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AdamSpannbauer/rush/issues"
+  },
+  "homepage": "https://github.com/AdamSpannbauer/rush#readme",
+  "devDependencies": {
+    "eslint": "^7.19.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1"
+  },
+  "dependencies": {
+    "eslint-config-p5js": "^1.1.0"
+  }
+}
