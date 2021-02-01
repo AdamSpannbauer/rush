@@ -1,12 +1,14 @@
 export default class Arcade {
-  constructor(games) {
+  constructor({ games, lives = 3 }) {
     this.games = games;
+    this.lives = lives;
     this.activeGame = null;
   }
 
   update() {
     if (this.activeGame) {
       if (this.activeGame.gameOver) {
+        // TODO: Should game have a 'success' flag to check here?
         this.activeGame = null;
       } else {
         this.activeGame.update();

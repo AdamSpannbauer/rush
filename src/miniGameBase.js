@@ -10,15 +10,12 @@ export default class MiniGame {
     this.name = name === null ? defaultGameName() : name;
     this.props = props;
 
+    this.maxSeconds = 5;
     this.gameOver = false;
   }
 
   reset() {
     this.gameOver = false;
-  }
-
-  start() {
-    this.reset();
   }
 
   // eslint-disable-next-line class-methods-use-this
