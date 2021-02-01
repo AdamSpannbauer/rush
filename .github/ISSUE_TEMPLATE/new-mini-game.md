@@ -1,7 +1,7 @@
 ---
-name: Custom issue template
-about: Describe this issue template's purpose here.
-title: New mini game idea
+name: New mini-game idea
+about: Suggest an idea for a new mini-game in the arcade
+title: New mini-game idea
 labels: minigame idea
 assignees: ''
 
