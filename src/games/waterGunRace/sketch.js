@@ -18,9 +18,9 @@ function draw() {
     }
   } else {
     background(0);
-    rect(0, height - 50, width * (1 - game.percentElapsed), 50);
   }
 
+  rect(0, height - 50, width * (1 - game.percentElapsed), 50);
   game.update();
   game.draw();
 }

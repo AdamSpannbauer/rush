@@ -11,6 +11,8 @@ export default class MiniGame {
     this.props = props;
 
     this.maxSeconds = 5;
+    this.startTime = Date.now();
+
     this.gameOver = false;
     this.gameWon = false;
   }

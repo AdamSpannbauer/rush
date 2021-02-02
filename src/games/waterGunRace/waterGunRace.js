@@ -17,9 +17,7 @@ export default class WaterGunRace extends MiniGame {
     this.noiseSeed = random(100);
     this.noiseStep = 0.005;
 
-    this.successPercent = 0.7;
-    this.maxSeconds = 5;
-    this.startTime = Date.now();
+    this.successPercent = 0.6;
     this.timeOnTarget = 0;
 
     this.horseR = 40;
@@ -32,25 +30,29 @@ export default class WaterGunRace extends MiniGame {
     return this.timeOnTarget / this.maxSeconds;
   }
 
-  get playerHasWon() {
+  get horseFinished() {
     this.gameWon = this.percentOnTarget >= this.successPercent;
     return this.gameWon;
   }
 
   updateGameState() {
-    if (this.playerHasWon || this.secondsElapsed > this.maxSeconds) {
+    if (this.horseFinished || this.secondsElapsed > this.maxSeconds) {
       this.gameOver = true;
     }
   }
 
   updateScore() {
-    const d = dist(this.x, this.y, mouseX, mouseY);
-    if (d < this.targetR && frameRate() > 0) {
+    if (this.gameOver) return;
+
+    const mouseTargetDist = dist(this.x, this.y, mouseX, mouseY);
+    if (mouseTargetDist < this.targetR && frameRate() > 0) {
       this.timeOnTarget += (1 / frameRate());
     }
   }
 
   updateTargetLoc() {
+    if (this.gameOver) return;
+
     this.x = map(noise(this.noiseSeed), 0, 1, this.minX, this.maxX);
     this.y = map(noise(this.noiseSeed, 10), 0, 1, this.minY, this.maxY);
     this.noiseSeed += this.noiseStep;
@@ -58,7 +60,6 @@ export default class WaterGunRace extends MiniGame {
 
   update() {
     this.updateGameState();
-    if (this.gameOver) return;
     this.updateScore();
     this.updateTargetLoc();
   }
