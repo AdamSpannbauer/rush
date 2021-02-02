@@ -12,6 +12,16 @@ export default class MiniGame {
 
     this.maxSeconds = 5;
     this.gameOver = false;
+    this.gameWon = false;
+  }
+
+  get secondsElapsed() {
+    const millisecondsElapsed = Date.now() - this.startTime;
+    return millisecondsElapsed / 1000;
+  }
+
+  get percentElapsed() {
+    return this.secondsElapsed / this.maxSeconds;
   }
 
   reset() {
