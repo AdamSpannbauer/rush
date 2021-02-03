@@ -1,4 +1,4 @@
-import Game from './waterGunRace.js';
+import Game from './miniGameClass.js';
 
 let game;
 
