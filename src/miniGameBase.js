@@ -6,7 +6,7 @@ const defaultGameName = (nDigits = 4) => {
 };
 
 export default class MiniGame {
-  constructor({ name = null, instructions = "Win the game", props = {} }) {
+  constructor({ name = null, instructions = 'Win the game', props = {} }) {
     this.name = name === null ? defaultGameName() : name;
     this.instructions = instructions;
     this.props = props;

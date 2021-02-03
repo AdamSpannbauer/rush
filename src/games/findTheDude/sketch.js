@@ -10,8 +10,8 @@ function setup() {
 function draw() {
   if (game.gameOver) noLoop();
 
-  if (game.percentElapsed >= 1){
-    game.gameOver=true;
+  if (game.percentElapsed >= 1) {
+    game.gameOver = true;
   }
 
   if (game.gameOver) {
@@ -24,14 +24,13 @@ function draw() {
     background(0);
   }
 
-  
-  push()
+  push();
   game.update();
   game.draw();
-  pop()
-  
-  fill(255, 100)
-  stroke(0)
+  pop();
+
+  fill(255, 100);
+  stroke(0);
   rect(0, height - 50, width * (1 - game.percentElapsed), 50);
 }
 

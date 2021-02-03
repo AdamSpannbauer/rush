@@ -10,8 +10,8 @@ function setup() {
 function draw() {
   if (game.gameOver) noLoop();
 
-  if (game.percentElapsed >= 1){
-    game.gameOver=true;
+  if (game.percentElapsed >= 1) {
+    game.gameOver = true;
   }
 
   if (game.gameOver) {
