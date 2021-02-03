@@ -24,13 +24,14 @@ function draw() {
     background(0);
   }
 
-  push();
+  
+  push()
   game.update();
   game.draw();
-  pop();
-
-  fill(255, 100);
-  stroke(0);
+  pop()
+  
+  fill(255, 100)
+  stroke(0)
   rect(0, height - 50, width * (1 - game.percentElapsed), 50);
 }
 
