@@ -27,8 +27,20 @@ export default class MiniGame {
     return this.secondsElapsed / this.maxSeconds;
   }
 
+  resetTime() {
+    this.startTime = Date.now();
+  }
+
   reset() {
     this.gameOver = false;
+    this.gameWon = false;
+    this.resetTime();
+    this.resetGame();
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  resetGame() {
+    throw new TypeError('MiniGame subclasses must define an `resetGame()` method.');
   }
 
   // eslint-disable-next-line class-methods-use-this

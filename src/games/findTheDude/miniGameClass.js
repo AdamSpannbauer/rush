@@ -10,6 +10,11 @@ export default class FindTheDude extends MiniGame {
     this.spotlightR = width * 0.6;
   }
 
+  resetGame() {
+    this.dudeX = random(width);
+    this.dudeY = random(height);
+  }
+
   checkFound() {
     if (dist(mouseX, mouseY, this.dudeX, this.dudeY) < this.dudeR) {
       this.gameOver = true;

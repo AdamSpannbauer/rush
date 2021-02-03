@@ -5,6 +5,10 @@ export default class YourMiniGame extends MiniGame {
     super({ name: 'YourMiniGame Name', props: {} });
   }
 
+  resetGame() {
+    // TODO: write a resetGame method (required)
+  }
+
   update() {
     // TODO: write an update method (required)
   }

@@ -26,6 +26,11 @@ export default class WaterGunRace extends MiniGame {
     this.update();
   }
 
+  resetGame() {
+    this.timeOnTarget = 0;
+    this.noiseSeed = random(100);
+  }
+
   get percentOnTarget() {
     return this.timeOnTarget / this.maxSeconds;
   }
