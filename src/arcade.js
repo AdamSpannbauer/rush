@@ -17,6 +17,8 @@ export default class Arcade {
     this.activeGame = null;
     // TODO: have player decide when rush starts
     this.rushStarted = true;
+    this.gamesWon = 0;
+    this.gameOver = false;
   }
 
   updateActiveGame() {
@@ -28,12 +30,8 @@ export default class Arcade {
       const gameLost = !this.activeGame.gameWon;
       if (gameLost) {
         this.lives -= 1;
-
-        if (this.lives <= 0) {
-          // TODO: do stuff for game over
-          console.log('GAME OVER');
-          noLoop();
-        }
+      } else {
+        this.gamesWon += 1;
       }
 
       this.activeGame = null;
@@ -43,23 +41,67 @@ export default class Arcade {
   }
 
   update() {
-    if (this.activeGame) {
+    if (this.activeGame && !this.gameOver) {
       this.updateActiveGame();
-    } else if (!this.activeGame && this.rushStarted) {
+
+      if (this.lives <= 0) {
+        this.gameOver = true;
+        this.activeGame = null;
+      }
+    } else if (!this.activeGame && this.rushStarted && !this.gameOver) {
       this.activeGameIndex += 1;
       const i = this.activeGameIndex % this.games.length;
       this.activeGame = this.games[i];
       this.activeGame.reset();
     } else {
-      this.updateSelectScreen();
+      // this.updateSelectScreen();
     }
   }
 
   drawTimer() {
+    // TODO: replace with nicer graphic for time
     push();
     fill(255, 100);
     stroke(0);
     rect(0, height - 50, width * (1 - this.activeGame.percentElapsed), 50);
+    pop();
+  }
+
+  drawLives() {
+    // TODO: replace with nicer graphic for lives
+    push();
+    textAlign(CENTER, CENTER);
+    textSize(30);
+
+    fill(0);
+    stroke(255);
+    strokeWeight(3);
+
+    text(`Lives remaining: ${this.lives}`, width / 2, textSize() * 2);
+    pop();
+  }
+
+  drawHUD() {
+    // TODO: other elements of HUD? add games won?
+    this.drawTimer();
+    this.drawLives();
+  }
+
+  drawGameOver() {
+    // TODO: pretty me
+    push();
+    textAlign(CENTER, CENTER);
+    textSize(50);
+
+    fill(0);
+    stroke(255, 0, 0);
+    strokeWeight(3);
+
+    text(
+      `GAME OVER\n${this.gamesWon} game${this.gamesWon === 1 ? '' : 's'} won`,
+      width / 2,
+      height / 2,
+    );
     pop();
   }
 
@@ -68,7 +110,10 @@ export default class Arcade {
       push();
       this.activeGame.draw();
       pop();
-      this.drawTimer();
+
+      this.drawHUD();
+    } else if (this.gameOver) {
+      this.drawGameOver();
     } else {
       this.drawSelectScreen();
     }
