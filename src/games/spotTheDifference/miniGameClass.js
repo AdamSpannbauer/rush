@@ -1,11 +1,11 @@
-import MiniGame from "../../miniGameBase.js";
-import { shuffle } from "../../utils.js";
+import MiniGame from '../../miniGameBase.js';
+import { shuffle } from '../../utils.js';
 
 export default class SpotTheDifference extends MiniGame {
   constructor() {
     super({
-      name: "Spot the Difference",
-      instructions: "Spot the Difference",
+      name: 'Spot the Difference',
+      instructions: 'Spot the Difference',
       props: {},
     });
 
@@ -45,12 +45,10 @@ export default class SpotTheDifference extends MiniGame {
       } else {
         answer = 2;
       }
+    } else if (mouseY < height / 2) {
+      answer = 1;
     } else {
-      if (mouseY < height / 2) {
-        answer = 1;
-      } else {
-        answer = 3;
-      }
+      answer = 3;
     }
 
     if (this.answerKey[answer]) {
