@@ -1,4 +1,4 @@
-import { shuffle } from "./utils.js";
+import { shuffle } from './utils.js';
 
 export default class Arcade {
   constructor({ games, lives = 5 }) {
@@ -108,9 +108,9 @@ export default class Arcade {
     strokeWeight(3);
 
     text(
-      `GAME OVER\n${this.gamesWon} game${this.gamesWon === 1 ? "" : "s"} won`,
+      `GAME OVER\n${this.gamesWon} game${this.gamesWon === 1 ? '' : 's'} won`,
       width / 2,
-      height / 2
+      height / 2,
     );
     pop();
   }

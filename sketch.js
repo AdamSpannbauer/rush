@@ -1,9 +1,10 @@
-import Arcade from "./src/arcade.js";
-import FindTheDude from "./src/games/findTheDude/miniGameClass.js";
-import SpotTheDifference from "./src/games/spotTheDifference/miniGameClass.js";
-import WaterGunRace from "./src/games/waterGunRace/waterGunRace.js";
+import Arcade from './src/arcade.js';
+import FindTheDude from './src/games/findTheDude/miniGameClass.js';
+import ProtectTheCenter from './src/games/protectTheCenter/miniGameClass.js';
+import SpotTheDifference from './src/games/spotTheDifference/miniGameClass.js';
+import WaterGunRace from './src/games/waterGunRace/waterGunRace.js';
 
-const gameClasses = [WaterGunRace, FindTheDude, SpotTheDifference];
+const gameClasses = [WaterGunRace, FindTheDude, SpotTheDifference, ProtectTheCenter];
 
 let arcade;
 
