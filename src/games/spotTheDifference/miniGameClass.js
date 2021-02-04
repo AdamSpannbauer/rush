@@ -20,7 +20,8 @@ export default class SpotTheDifference extends MiniGame {
     this.angleStep = 0.005;
   }
 
-  static drawPolygon(x, y, radius, angle, nSides) {
+  // eslint-disable-next-line class-methods-use-this
+  drawPolygon(x, y, radius, angle, nSides) {
     push();
     translate(x, y);
     rotate(angle);
