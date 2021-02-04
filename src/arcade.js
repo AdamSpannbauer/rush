@@ -1,10 +1,4 @@
-const shuffle = (arr) => {
-  for (let i = arr.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
-    // eslint-disable-next-line no-param-reassign
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-};
+import { shuffle } from "./utils.js";
 
 export default class Arcade {
   constructor({ games, lives = 5 }) {
@@ -114,9 +108,9 @@ export default class Arcade {
     strokeWeight(3);
 
     text(
-      `GAME OVER\n${this.gamesWon} game${this.gamesWon === 1 ? '' : 's'} won`,
+      `GAME OVER\n${this.gamesWon} game${this.gamesWon === 1 ? "" : "s"} won`,
       width / 2,
-      height / 2,
+      height / 2
     );
     pop();
   }

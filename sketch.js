@@ -1,11 +1,9 @@
-import Arcade from './src/arcade.js';
-import FindTheDude from './src/games/findTheDude/miniGameClass.js';
-import WaterGunRace from './src/games/waterGunRace/waterGunRace.js';
+import Arcade from "./src/arcade.js";
+import FindTheDude from "./src/games/findTheDude/miniGameClass.js";
+import SpotTheDifference from "./src/games/spotTheDifference/miniGameClass.js";
+import WaterGunRace from "./src/games/waterGunRace/waterGunRace.js";
 
-const gameClasses = [
-  WaterGunRace,
-  FindTheDude,
-];
+const gameClasses = [WaterGunRace, FindTheDude, SpotTheDifference];
 
 let arcade;
 
@@ -13,9 +11,7 @@ function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
 
-function preload() {
-
-}
+function preload() {}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
