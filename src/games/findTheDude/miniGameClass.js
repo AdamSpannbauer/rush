@@ -2,7 +2,7 @@ import MiniGame from '../../miniGameBase.js';
 
 export default class FindTheDude extends MiniGame {
   constructor() {
-    super({ name: 'Find the Dude', props: {} });
+    super({ name: 'Find the Dude', instructions: 'Find the Dude!', props: {} });
 
     this.dudeX = random(width);
     this.dudeY = random(height);

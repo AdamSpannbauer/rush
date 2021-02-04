@@ -81,10 +81,26 @@ export default class Arcade {
     pop();
   }
 
+  drawInstructions() {
+    if (this.activeGame.percentElapsed > 0.2) return;
+
+    push();
+    textAlign(CENTER, CENTER);
+    textSize(100);
+
+    fill(0);
+    stroke(255);
+    strokeWeight(3);
+
+    text(`${this.activeGame.instructions}`, width / 2, height - textSize());
+    pop();
+  }
+
   drawHUD() {
     // TODO: other elements of HUD? add games won?
     this.drawTimer();
     this.drawLives();
+    this.drawInstructions();
   }
 
   drawGameOver() {
