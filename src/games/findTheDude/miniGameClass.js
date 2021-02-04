@@ -27,6 +27,7 @@ export default class FindTheDude extends MiniGame {
   }
 
   draw() {
+    background(0);
     fill(255, 100);
     ellipse(mouseX, mouseY, this.spotlightR * 2);
     fill(0, 255, 0);

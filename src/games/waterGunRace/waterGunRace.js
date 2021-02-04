@@ -4,11 +4,11 @@ export default class WaterGunRace extends MiniGame {
   constructor() {
     super({ name: 'Water Gun Race', props: {} });
 
-    this.ballR = 80;
-    this.targetR = 30;
+    this.ballR = 90;
+    this.targetR = this.ballR / 4;
 
-    this.minX = 0;
-    this.maxX = width;
+    this.minX = (width / 2) - width * 0.25;
+    this.maxX = (width / 2) + width * 0.25;
     this.minY = height / 2;
     this.maxY = height;
 
@@ -77,7 +77,11 @@ export default class WaterGunRace extends MiniGame {
     ellipse(horseX, this.horseY, this.horseR * 2);
     ellipse(this.x, this.y, this.ballR * 2);
 
-    fill(255, 230, 180);
+    fill(255, 100, 100);
+    ellipse(this.x, this.y, (this.ballR * 0.75) * 2);
+    fill(255);
+    ellipse(this.x, this.y, (this.ballR * 0.5) * 2);
+    fill(255, 100, 100);
     ellipse(this.x, this.y, this.targetR * 2);
     pop();
   }
