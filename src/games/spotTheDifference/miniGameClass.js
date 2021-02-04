@@ -20,7 +20,7 @@ export default class SpotTheDifference extends MiniGame {
     this.angleStep = 0.005;
   }
 
-  drawPolygon(x, y, radius, angle, nSides) {
+  static drawPolygon(x, y, radius, angle, nSides) {
     push();
     translate(x, y);
     rotate(angle);

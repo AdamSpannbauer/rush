@@ -22,8 +22,6 @@ export default class ProtectTheCenter extends MiniGame {
     this.enemies = [];
   }
 
-  // TODO: es6 js static method?
-  // eslint-disable-next-line class-methods-use-this
   spawnEnemy() {
     const rand = random();
 
