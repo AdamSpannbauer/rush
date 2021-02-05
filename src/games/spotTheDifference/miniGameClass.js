@@ -64,10 +64,10 @@ export default class SpotTheDifference extends MiniGame {
     this.nSides = floor(random(5, 8));
   }
 
-  update() {
+  update(events) {
     this.angle += this.angleStep;
 
-    if (mouseIsPressed) {
+    if (events?.mousePressed) {
       this.checkAnswer();
     }
   }

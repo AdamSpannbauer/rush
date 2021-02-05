@@ -15,7 +15,7 @@ export default class Arcade {
     this.gameOver = false;
   }
 
-  updateActiveGame() {
+  updateActiveGame(events) {
     if (this.activeGame.percentElapsed >= 1) {
       this.activeGame.gameOver = true;
     }
@@ -30,13 +30,13 @@ export default class Arcade {
 
       this.activeGame = null;
     } else {
-      this.activeGame.update();
+      this.activeGame.update(events);
     }
   }
 
-  update() {
+  update(events) {
     if (this.activeGame && !this.gameOver) {
-      this.updateActiveGame();
+      this.updateActiveGame(events);
 
       if (this.lives <= 0) {
         this.gameOver = true;

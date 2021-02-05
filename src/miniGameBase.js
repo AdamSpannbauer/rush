@@ -44,7 +44,7 @@ export default class MiniGame {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  update() {
+  update(events) {
     throw new TypeError('MiniGame subclasses must define an `update()` method.');
   }
 
