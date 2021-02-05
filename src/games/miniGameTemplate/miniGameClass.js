@@ -15,6 +15,8 @@ export default class YourMiniGame extends MiniGame {
     // Examples with events:
     //  if (events.mousePressed) {//do stuff}
     //  if (events.mouseReleased) {//do stuff}
+    //  if (events.keysPressed.includes('enter')) {//do stuff}
+    //  if (events.keysReleased.includes('arrowup')) {//do stuff}
   }
 
   draw() {

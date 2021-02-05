@@ -25,10 +25,20 @@ function mouseReleased() {
   touchEnded();
 }
 
+function keyPressed() {
+  events.keysPressed.push(key.toLowerCase());
+}
+
+function keyReleased() {
+  events.keysReleased.push(key.toLowerCase());
+}
+
 function resetEvents() {
   events = {
     mousePressed: false,
     mouseReleased: false,
+    keysPressed: [],
+    keysReleased: [],
   };
 }
 
@@ -51,14 +61,20 @@ function draw() {
 
   arcade.draw();
   arcade.update(events);
+
   resetEvents();
 }
 
 window.windowResized = windowResized;
+
 window.mousePressed = mousePressed;
 window.mouseReleased = mouseReleased;
+
 window.touchStarted = touchStarted;
 window.touchEnded = touchEnded;
+
+window.keyPressed = keyPressed;
+window.keyReleased = keyReleased;
 
 window.preload = preload;
 window.setup = setup;
