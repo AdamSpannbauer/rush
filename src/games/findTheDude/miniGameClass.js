@@ -22,7 +22,7 @@ export default class FindTheDude extends MiniGame {
     }
   }
 
-  update() {
+  update(events) {
     this.checkFound();
   }
 

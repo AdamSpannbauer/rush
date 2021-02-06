@@ -52,7 +52,7 @@ export default class ProtectTheCenter extends MiniGame {
     };
   }
 
-  updateEnemies() {
+  updateEnemies(events) {
     this.enemies.forEach((enemy) => {
       if (enemy.dead || this.gameOver) return;
 
@@ -63,7 +63,7 @@ export default class ProtectTheCenter extends MiniGame {
         return;
       }
 
-      if (mouseIsPressed) {
+      if (events?.mousePressed) {
         const mouseD = dist(mouseX, mouseY, enemy.pos.x, enemy.pos.y);
         // eslint-disable-next-line no-param-reassign
         enemy.dead = mouseD <= this.enemyR;
@@ -77,12 +77,12 @@ export default class ProtectTheCenter extends MiniGame {
     this.enemies = this.enemies.filter((e) => !e.dead);
   }
 
-  update() {
+  update(events) {
     if (this.frameCount % this.spawnEveryNFrames === 0) {
       this.enemies.push(this.spawnEnemy());
     }
 
-    this.updateEnemies();
+    this.updateEnemies(events);
     this.frameCount += 1;
   }
 
