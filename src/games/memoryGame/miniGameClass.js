@@ -1,11 +1,11 @@
-import MiniGame from "../../miniGameBase.js";
-import { drawPolygon, shuffle } from "../../utils.js";
+import MiniGame from '../../miniGameBase.js';
+import { drawPolygon } from '../../utils.js';
 
 export default class MemoryGame extends MiniGame {
   constructor() {
     super({
-      name: "Memory Game",
-      instructions: "Memorize the shapes",
+      name: 'Memory Game',
+      instructions: 'Memorize the shapes',
       props: {},
     });
 
@@ -13,19 +13,22 @@ export default class MemoryGame extends MiniGame {
     this.totalMemorySeconds = 2.5;
 
     this.playerOptions = [3, 4, 5, 6];
-    this.answerKey = [...this.playerOptions];
-    this.radius = min([width, height]) / 6;
-    this.optionsRadius = min([width, height]) / 12;
+    this.answerKey = this.playerOptions.map(() => random(this.playerOptions));
+    this.userAnswers = [];
 
-    let offset = (this.answerKey.length / 2) * this.optionsRadius * 2;
-    this.minOptionsX = width / 2 - offset;
-    this.maxOptionsX = width / 2 + offset;
+    let offset;
 
+    this.radius = width * 0.09;
+    this.answersY = height * 0.4;
     offset = (this.answerKey.length / 2) * this.radius * 2;
     this.minX = width / 2 - offset;
     this.maxX = width / 2 + offset;
 
-    shuffle(this.answerKey);
+    this.optionsRadius = this.radius * 0.5;
+    this.optionsY = height * 0.75;
+    offset = (this.answerKey.length / 2) * this.optionsRadius * 2;
+    this.minOptionsX = width / 2 - offset;
+    this.maxOptionsX = width / 2 + offset;
   }
 
   get memorySecondsElapsed() {
@@ -39,53 +42,102 @@ export default class MemoryGame extends MiniGame {
 
   resetGame() {
     this.memoryStart = Date.now();
-    shuffle(this.answerKey);
+    this.userAnswers = [];
+    this.answerKey = this.playerOptions.map(() => random(this.playerOptions));
   }
 
-  update(events) {
-    if (this.memoryStage) {
-      this.resetTime();
-    }
-    // TODO: write an update method (required)
-    // Examples with events:
-    //  if (events.mousePressed) {//do stuff}
-    //  if (events.mouseReleased) {//do stuff}
-  }
-
-  draw() {
-    this.answerKey.forEach((nSides, i) => {
-      const answerY = height * 0.4;
-      const answerX = map(
-        i,
-        0,
-        this.answerKey.length - 1,
-        this.minX,
-        this.maxX
-      );
-      ellipse(answerX, answerY, this.radius * 2.4);
-      if (this.memoryStage) {
-        let y = answerY;
-        // Triangle looks better adjusted down
-        if (nSides === 3) {
-          y += this.radius * 0.1;
-        }
-        drawPolygon(answerX, y, this.radius, -HALF_PI, nSides);
-      } else {
+  checkAnswer(events) {
+    if (events?.mousePressed) {
+      this.playerOptions.forEach((playerOption, i) => {
         const x = map(
           i,
           0,
           this.answerKey.length - 1,
           this.minOptionsX,
-          this.maxOptionsX
+          this.maxOptionsX,
         );
-        let y = height * 0.75;
-        // Triangle looks better adjusted down
-        if (this.playerOptions[i] === 3) {
-          y += this.optionsRadius * 0.1;
-        }
 
-        drawPolygon(x, y, this.optionsRadius, -HALF_PI, this.playerOptions[i]);
-      }
+        const d = dist(mouseX, mouseY, x, this.optionsY);
+
+        if (d < this.optionsRadius) {
+          this.userAnswers.push(playerOption);
+        }
+      });
+    }
+  }
+
+  update(events) {
+    if (this.memoryStage) {
+      this.resetTime();
+    } else {
+      this.checkAnswer(events);
+    }
+
+    if (this.userAnswers.length === this.answerKey.length) {
+      let allEqual = true;
+      this.userAnswers.forEach((answer, i) => {
+        allEqual = allEqual && answer === this.answerKey[i];
+      });
+
+      this.gameWon = allEqual;
+      this.gameOver = true;
+    }
+  }
+
+  drawAnswer(x, i) {
+    let y = this.answersY;
+    let nSides = 0;
+
+    if (this.memoryStage) {
+      nSides = this.answerKey[i];
+    } else if (i < this.userAnswers.length) {
+      nSides = this.userAnswers[i];
+    }
+
+    // Triangle looks better adjusted down
+    if (nSides === 3) y += this.radius * 0.1;
+
+    if (nSides) {
+      drawPolygon(x, y, this.radius, -HALF_PI, nSides);
+    }
+  }
+
+  drawOption(i) {
+    if (this.memoryStage) return;
+
+    const x = map(
+      i,
+      0,
+      this.answerKey.length - 1,
+      this.minOptionsX,
+      this.maxOptionsX,
+    );
+
+    let y = this.optionsY;
+    // Triangle looks better adjusted down
+    if (this.playerOptions[i] === 3) {
+      y += this.optionsRadius * 0.1;
+    }
+
+    const nSides = this.playerOptions[i];
+    drawPolygon(x, y, this.optionsRadius, -HALF_PI, nSides);
+  }
+
+  draw() {
+    this.answerKey.forEach((nSides, i) => {
+      // Always draw underlying circles
+      const { answersY } = this;
+      const answerX = map(
+        i,
+        0,
+        this.answerKey.length - 1,
+        this.minX,
+        this.maxX,
+      );
+      ellipse(answerX, answersY, this.radius * 2.4);
+
+      this.drawAnswer(answerX, i);
+      this.drawOption(i);
     });
   }
 }
