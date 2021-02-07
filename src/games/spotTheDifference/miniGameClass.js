@@ -1,11 +1,11 @@
-import MiniGame from '../../miniGameBase.js';
-import { shuffle } from '../../utils.js';
+import MiniGame from "../../miniGameBase.js";
+import { drawPolygon, shuffle } from "../../utils.js";
 
 export default class SpotTheDifference extends MiniGame {
   constructor() {
     super({
-      name: 'Spot the Difference',
-      instructions: 'Spot the Difference',
+      name: "Spot the Difference",
+      instructions: "Spot the Difference",
       props: {},
     });
 
@@ -18,23 +18,6 @@ export default class SpotTheDifference extends MiniGame {
 
     this.angle = 0;
     this.angleStep = 0.005;
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  drawPolygon(x, y, radius, angle, nSides) {
-    push();
-    translate(x, y);
-    rotate(angle);
-
-    beginShape();
-    for (let a = 0; a < TWO_PI; a += TWO_PI / nSides) {
-      const xi = cos(a) * radius;
-      const yi = sin(a) * radius;
-
-      vertex(xi, yi);
-    }
-    endShape(CLOSE);
-    pop();
   }
 
   checkAnswer() {
@@ -96,7 +79,7 @@ export default class SpotTheDifference extends MiniGame {
         x = width * 0.75;
       }
 
-      this.drawPolygon(x, y, this.radius, this.angle + i * QUARTER_PI, nSides);
+      drawPolygon(x, y, this.radius, this.angle + i * QUARTER_PI, nSides);
     });
   }
 }

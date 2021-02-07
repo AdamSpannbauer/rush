@@ -17,7 +17,7 @@ export default class WaterGunRace extends MiniGame {
     this.noiseSeed = random(100);
     this.noiseStep = 0.005;
 
-    this.successPercent = 0.6;
+    this.successPercent = 0.4;
     this.timeOnTarget = 0;
 
     this.horseR = 40;

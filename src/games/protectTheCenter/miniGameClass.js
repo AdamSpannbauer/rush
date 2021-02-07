@@ -9,7 +9,7 @@ export default class ProtectTheCenter extends MiniGame {
     this.spawnEveryNFrames = 10;
     this.frameCount = 0;
 
-    this.enemySpeed = 1;
+    this.enemySpeed = min([width, height]) * 0.002;
     this.enemyR = 30;
 
     this.gameWon = true;

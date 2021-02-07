@@ -1,10 +1,17 @@
 import Arcade from './src/arcade.js';
 import FindTheDude from './src/games/findTheDude/miniGameClass.js';
+import MemoryGame from './src/games/memoryGame/miniGameClass.js';
 import ProtectTheCenter from './src/games/protectTheCenter/miniGameClass.js';
 import SpotTheDifference from './src/games/spotTheDifference/miniGameClass.js';
 import WaterGunRace from './src/games/waterGunRace/waterGunRace.js';
 
-const gameClasses = [WaterGunRace, FindTheDude, SpotTheDifference, ProtectTheCenter];
+const gameClasses = [
+  WaterGunRace,
+  FindTheDude,
+  SpotTheDifference,
+  ProtectTheCenter,
+  MemoryGame,
+];
 
 let arcade;
 let events = {};
@@ -57,7 +64,10 @@ function setup() {
 }
 
 function draw() {
-  background(200);
+  background(0);
+
+  fill(255, 100);
+  stroke(0);
 
   arcade.draw();
   arcade.update(events);
