@@ -4,9 +4,8 @@ import { drawPolygon, shuffle } from "../../utils.js";
 export default class SpotTheDifference extends MiniGame {
   constructor() {
     super({
-      name: "Spot the Difference",
-      instructions: "Spot the Difference",
-      props: {},
+      name: 'Spot the Difference',
+      instructions: 'Spot the Difference'
     });
 
     this.answerKey = [0, 0, 0, 1];

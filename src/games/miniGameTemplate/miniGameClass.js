@@ -2,7 +2,7 @@ import MiniGame from '../../miniGameBase.js';
 
 export default class YourMiniGame extends MiniGame {
   constructor() {
-    super({ name: 'YourMiniGame Name', instructions: 'Do the thing!', props: {} });
+    super({ name: 'YourMiniGame Name', instructions: 'Do the thing!'});
   }
 
   resetGame() {

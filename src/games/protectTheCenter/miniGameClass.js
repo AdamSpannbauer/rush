@@ -2,7 +2,7 @@ import MiniGame from '../../miniGameBase.js';
 
 export default class ProtectTheCenter extends MiniGame {
   constructor() {
-    super({ name: 'Protect the Center', instructions: 'Protect the center!', props: {} });
+    super({ name: 'Protect the Center', instructions: 'Protect the center!'});
 
     this.homeBaseR = 50;
 
