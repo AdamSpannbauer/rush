@@ -6,10 +6,9 @@ const defaultGameName = (nDigits = 4) => {
 };
 
 export default class MiniGame {
-  constructor({ name = null, instructions = 'Win the game', props = {} }) {
-    this.name = name === null ? defaultGameName() : name;
+  constructor({ name, instructions = 'Win the game'}) {
+    this.name = name ? name : defaultGameName();
     this.instructions = instructions;
-    this.props = props;
 
     this.maxSeconds = 5;
     this.startTime = Date.now();
