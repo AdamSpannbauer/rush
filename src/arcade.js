@@ -1,11 +1,12 @@
 import { shuffle } from './utils.js';
 
 export default class Arcade {
-  constructor({ games, lives = 5 }) {
+  constructor({ games, lives = 5, events = {} }) {
     this.games = games;
     shuffle(this.games);
 
     this.lives = lives;
+    this.events = events;
 
     this.activeGameIndex = 0;
     this.activeGame = null;
@@ -45,7 +46,9 @@ export default class Arcade {
     } else if (!this.activeGame && this.rushStarted && !this.gameOver) {
       this.activeGameIndex += 1;
       const i = this.activeGameIndex % this.games.length;
+
       this.activeGame = this.games[i];
+      this.activeGame.events = this.events;
       this.activeGame.reset();
     } else {
       // this.updateSelectScreen();

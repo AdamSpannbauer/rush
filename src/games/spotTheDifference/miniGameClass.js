@@ -1,11 +1,11 @@
-import MiniGame from "../../miniGameBase.js";
-import { drawPolygon, shuffle } from "../../utils.js";
+import MiniGame from '../../miniGameBase.js';
+import { drawPolygon, shuffle } from '../../utils.js';
 
 export default class SpotTheDifference extends MiniGame {
   constructor() {
     super({
       name: 'Spot the Difference',
-      instructions: 'Spot the Difference'
+      instructions: 'Spot the Difference',
     });
 
     this.answerKey = [0, 0, 0, 1];
@@ -46,10 +46,10 @@ export default class SpotTheDifference extends MiniGame {
     this.nSides = floor(random(5, 8));
   }
 
-  update(events) {
+  update() {
     this.angle += this.angleStep;
 
-    if (events?.mousePressed) {
+    if (this.events.mousePressed) {
       this.checkAnswer();
     }
   }

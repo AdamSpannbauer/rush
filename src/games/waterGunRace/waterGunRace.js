@@ -2,7 +2,7 @@ import MiniGame from '../../miniGameBase.js';
 
 export default class WaterGunRace extends MiniGame {
   constructor() {
-    super({ name: 'Water Gun Race', instructions: 'Hit the Target!'});
+    super({ name: 'Water Gun Race', instructions: 'Hit the Target!' });
 
     this.ballR = 90;
     this.targetR = this.ballR / 4;
