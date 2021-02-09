@@ -4,12 +4,11 @@ import ProtectTheCenter from './games/protectTheCenter/miniGameClass.js';
 import SpotTheDifference from './games/spotTheDifference/miniGameClass.js';
 import WaterGunRace from './games/waterGunRace/waterGunRace.js';
 
-const GAMES_LIST = [
+// eslint-disable-next-line import/prefer-default-export
+export const GAMES_LIST = [
   WaterGunRace,
   FindTheDude,
   SpotTheDifference,
   ProtectTheCenter,
   MemoryGame,
 ];
-
-export default GAMES_LIST;

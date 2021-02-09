@@ -1,6 +1,6 @@
 import Arcade from './src/arcade.js';
 import Events from './src/events.js';
-import GAMES_LIST from './src/gamesList.js';
+import { GAMES_LIST } from './src/gamesList.js';
 
 let arcade;
 
