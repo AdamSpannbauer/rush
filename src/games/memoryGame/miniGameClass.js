@@ -46,8 +46,8 @@ export default class MemoryGame extends MiniGame {
     this.answerKey = this.playerOptions.map(() => random(this.playerOptions));
   }
 
-  checkAnswer(events) {
-    if (events?.mousePressed) {
+  checkAnswer() {
+    if (this.events.mousePressed) {
       this.playerOptions.forEach((playerOption, i) => {
         const x = map(
           i,
@@ -66,11 +66,11 @@ export default class MemoryGame extends MiniGame {
     }
   }
 
-  update(events) {
+  update() {
     if (this.memoryStage) {
       this.resetTime();
     } else {
-      this.checkAnswer(events);
+      this.checkAnswer();
     }
 
     if (this.userAnswers.length === this.answerKey.length) {

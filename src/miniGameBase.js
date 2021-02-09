@@ -1,3 +1,5 @@
+import Events from './events.js';
+
 const defaultGameName = (nDigits = 4) => {
   const randNum = random(10 ** (nDigits - 1));
   const randNumStr = randNum.toLocaleString('en-US', { minimumIntegerDigits: nDigits });
@@ -6,9 +8,10 @@ const defaultGameName = (nDigits = 4) => {
 };
 
 export default class MiniGame {
-  constructor({ name, instructions = 'Win the game'}) {
-    this.name = name ? name : defaultGameName();
+  constructor({ name, instructions = 'Win the game' }) {
+    this.name = name || defaultGameName();
     this.instructions = instructions;
+    this.events = new Events();
 
     this.maxSeconds = 5;
     this.startTime = Date.now();

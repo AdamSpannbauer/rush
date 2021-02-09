@@ -2,7 +2,7 @@ import MiniGame from '../../miniGameBase.js';
 
 export default class FindTheDude extends MiniGame {
   constructor() {
-    super({ name: 'Find the Dude', instructions: 'Find the Dude!'});
+    super({ name: 'Find the Dude', instructions: 'Find the Dude!' });
 
     this.dudeX = random(width);
     this.dudeY = random(height);
@@ -22,7 +22,7 @@ export default class FindTheDude extends MiniGame {
     }
   }
 
-  update(events) {
+  update() {
     this.checkFound();
   }
 

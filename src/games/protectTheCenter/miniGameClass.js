@@ -2,7 +2,7 @@ import MiniGame from '../../miniGameBase.js';
 
 export default class ProtectTheCenter extends MiniGame {
   constructor() {
-    super({ name: 'Protect the Center', instructions: 'Protect the center!'});
+    super({ name: 'Protect the Center', instructions: 'Protect the center!' });
 
     this.homeBaseR = 50;
 
@@ -52,7 +52,7 @@ export default class ProtectTheCenter extends MiniGame {
     };
   }
 
-  updateEnemies(events) {
+  updateEnemies() {
     this.enemies.forEach((enemy) => {
       if (enemy.dead || this.gameOver) return;
 
@@ -63,7 +63,7 @@ export default class ProtectTheCenter extends MiniGame {
         return;
       }
 
-      if (events?.mousePressed) {
+      if (this.events.mousePressed) {
         const mouseD = dist(mouseX, mouseY, enemy.pos.x, enemy.pos.y);
         // eslint-disable-next-line no-param-reassign
         enemy.dead = mouseD <= this.enemyR;
@@ -77,12 +77,12 @@ export default class ProtectTheCenter extends MiniGame {
     this.enemies = this.enemies.filter((e) => !e.dead);
   }
 
-  update(events) {
+  update() {
     if (this.frameCount % this.spawnEveryNFrames === 0) {
       this.enemies.push(this.spawnEnemy());
     }
 
-    this.updateEnemies(events);
+    this.updateEnemies();
     this.frameCount += 1;
   }
 

@@ -1,4 +1,5 @@
 import Arcade from './src/arcade.js';
+import Events from './src/events.js';
 import FindTheDude from './src/games/findTheDude/miniGameClass.js';
 import MemoryGame from './src/games/memoryGame/miniGameClass.js';
 import ProtectTheCenter from './src/games/protectTheCenter/miniGameClass.js';
@@ -14,53 +15,17 @@ const gameClasses = [
 ];
 
 let arcade;
-let events = {};
-
-function touchStarted() {
-  events.mousePressed = true;
-}
-
-function touchEnded() {
-  events.mouseReleased = true;
-}
-
-function mousePressed() {
-  touchStarted();
-}
-
-function mouseReleased() {
-  touchEnded();
-}
-
-function keyPressed() {
-  events.keysPressed.push(key.toLowerCase());
-}
-
-function keyReleased() {
-  events.keysReleased.push(key.toLowerCase());
-}
-
-function resetEvents() {
-  events = {
-    mousePressed: false,
-    mouseReleased: false,
-    keysPressed: [],
-    keysReleased: [],
-  };
-}
-
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
-}
 
 function preload() {}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   const games = gameClasses.map((G) => new G());
-  arcade = new Arcade({ games, lives: 3 });
-
-  resetEvents();
+  arcade = new Arcade({
+    games,
+    lives: 3,
+    events: new Events(),
+  });
 }
 
 function draw() {
@@ -70,22 +35,20 @@ function draw() {
   stroke(0);
 
   arcade.draw();
-  arcade.update(events);
-
-  resetEvents();
+  arcade.update();
+  arcade.events.reset();
 }
 
-window.windowResized = windowResized;
-
-window.mousePressed = mousePressed;
-window.mouseReleased = mouseReleased;
-
-window.touchStarted = touchStarted;
-window.touchEnded = touchEnded;
-
-window.keyPressed = keyPressed;
-window.keyReleased = keyReleased;
-
+window.windowResized = () => resizeCanvas(windowWidth, windowHeight);
 window.preload = preload;
 window.setup = setup;
 window.draw = draw;
+
+window.mousePressed = () => arcade.events.logMousePressed();
+window.touchStarted = () => arcade.events.logMousePressed();
+
+window.mouseReleased = () => arcade.events.logMouseReleased();
+window.touchEnded = () => arcade.events.logMouseReleased();
+
+window.keyPressed = () => arcade.events.logKeyPressed(key);
+window.keyReleased = () => arcade.events.logKeyReleased(key);

@@ -2,21 +2,21 @@ import MiniGame from '../../miniGameBase.js';
 
 export default class YourMiniGame extends MiniGame {
   constructor() {
-    super({ name: 'YourMiniGame Name', instructions: 'Do the thing!'});
+    super({ name: 'YourMiniGame Name', instructions: 'Do the thing!' });
   }
 
   resetGame() {
     // TODO: write a resetGame method (required)
   }
 
-  update(events) {
+  update() {
     // TODO: write an update method (required)
 
     // Examples with events:
-    //  if (events.mousePressed) {//do stuff}
-    //  if (events.mouseReleased) {//do stuff}
-    //  if (events.keysPressed.includes('enter')) {//do stuff}
-    //  if (events.keysReleased.includes('arrowup')) {//do stuff}
+    //  if (this.events.mousePressed) {//do stuff}
+    //  if (this.events.mouseReleased) {//do stuff}
+    //  if (this.events.keyWasPressed('enter')) {//do stuff}
+    //  if (this.events.keyWasReleased('arrowup')) {//do stuff}
   }
 
   draw() {
