@@ -25,6 +25,6 @@ An in browser mini-game rush style game.
        * `this.events.keysReleased` - holds an array of strings listing the keys released this frame
 5. Add your mini game to [`src/gamesList.js`](src/gamesList.js).  For the game to be added, you need to add an import statement and add the imported class into the `GAMES_LIST` array.
 6. Test the game was integrated as expected.
-  * Serve the game from the root directory of the repo
-  * Ensure the game appears eventually appears in the overall game and that it behaves as expected.
+   * Serve the game from the root directory of the repo
+   * Ensure the game appears eventually appears in the overall game and that it behaves as expected.
 7. Open up a pull request for review
