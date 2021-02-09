@@ -4,7 +4,9 @@ import GAMES_LIST from './src/gamesList.js';
 
 let arcade;
 
-function preload() {}
+function preload() {
+  // TODO: Eventually consider loading assets here
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
