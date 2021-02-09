@@ -23,7 +23,18 @@ function draw() {
   rect(0, height - 50, width * (1 - game.percentElapsed), 50);
   game.update();
   game.draw();
+
+  game.events.reset();
 }
 
 window.setup = setup;
 window.draw = draw;
+
+window.mousePressed = () => game.events.logMousePressed();
+window.touchStarted = () => game.events.logMousePressed();
+
+window.mouseReleased = () => game.events.logMouseReleased();
+window.touchEnded = () => game.events.logMouseReleased();
+
+window.keyPressed = () => game.events.logKeyPressed(key);
+window.keyReleased = () => game.events.logKeyReleased(key);
