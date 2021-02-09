@@ -1,18 +1,6 @@
 import Arcade from './src/arcade.js';
 import Events from './src/events.js';
-import FindTheDude from './src/games/findTheDude/miniGameClass.js';
-import MemoryGame from './src/games/memoryGame/miniGameClass.js';
-import ProtectTheCenter from './src/games/protectTheCenter/miniGameClass.js';
-import SpotTheDifference from './src/games/spotTheDifference/miniGameClass.js';
-import WaterGunRace from './src/games/waterGunRace/waterGunRace.js';
-
-const gameClasses = [
-  WaterGunRace,
-  FindTheDude,
-  SpotTheDifference,
-  ProtectTheCenter,
-  MemoryGame,
-];
+import GAMES_LIST from './src/gamesList.js';
 
 let arcade;
 
@@ -20,7 +8,7 @@ function preload() {}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  const games = gameClasses.map((G) => new G());
+  const games = GAMES_LIST.map((Game) => new Game());
   arcade = new Arcade({
     games,
     lives: 3,
