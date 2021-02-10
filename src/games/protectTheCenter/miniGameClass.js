@@ -1,6 +1,6 @@
-import MiniGame from '../../miniGameBase.js';
+import { MiniGame } from '../../miniGameBase.js';
 
-export default class ProtectTheCenter extends MiniGame {
+export class ProtectTheCenter extends MiniGame {
   constructor() {
     super({ name: 'Protect the Center', instructions: 'Protect the center!' });
 

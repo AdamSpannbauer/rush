@@ -1,6 +1,6 @@
 import { shuffle } from './utils.js';
 
-export default class Arcade {
+export class Arcade {
   constructor({ games, lives = 5, events = {} }) {
     this.games = games;
     shuffle(this.games);

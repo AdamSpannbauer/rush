@@ -1,7 +1,7 @@
-import MiniGame from '../../miniGameBase.js';
+import { MiniGame } from '../../miniGameBase.js';
 import { drawPolygon } from '../../utils.js';
 
-export default class MemoryGame extends MiniGame {
+export class MemoryGame extends MiniGame {
   constructor() {
     super({
       name: 'Memory Game',

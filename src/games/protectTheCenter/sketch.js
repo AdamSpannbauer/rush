@@ -1,10 +1,10 @@
-import Game from './miniGameClass.js';
+import { ProtectTheCenter } from './miniGameClass.js';
 
 let game;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  game = new Game();
+  game = new ProtectTheCenter();
 }
 
 function draw() {

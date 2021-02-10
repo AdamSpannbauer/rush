@@ -1,6 +1,6 @@
-import MiniGame from '../../miniGameBase.js';
+import { MiniGame } from '../../miniGameBase.js';
 
-export default class WaterGunRace extends MiniGame {
+export class WaterGunRace extends MiniGame {
   constructor() {
     super({ name: 'Water Gun Race', instructions: 'Hit the Target!' });
 

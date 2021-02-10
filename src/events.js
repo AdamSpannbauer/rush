@@ -1,4 +1,4 @@
-export default class Events {
+export class Events {
   constructor() {
     this.reset();
   }

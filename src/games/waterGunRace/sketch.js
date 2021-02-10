@@ -1,10 +1,10 @@
-import Game from './waterGunRace.js';
+import { WaterGunRace } from './waterGunRace.js';
 
 let game;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  game = new Game();
+  game = new WaterGunRace();
 }
 
 function draw() {
