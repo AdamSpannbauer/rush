@@ -1,10 +1,13 @@
-import { YourMiniGame } from './miniGameClass.js';
+// Replace `YourMiniGame` in the import statement
+// below.  Do not change the alias UserMiniGame as it is used
+// in the remainder of this script.
+import { YourMiniGame as UserMiniGame } from './miniGameClass.js';
 
 let game;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  game = new YourMiniGame();
+  game = new UserMiniGame();
 }
 
 function draw() {
