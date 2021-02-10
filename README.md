@@ -22,7 +22,7 @@ An in browser mini-game rush style game with a focus on open source collaboratio
 
 * DO NOT change anything in `sketch.js`
   * Your minigame will be integrated into the arcade by importing the class from `src/game/<yourMiniGameName>/miniGameClass.js`. Your changes in `sketch.js` will not be imported into the overall minigame rush gameplay.  Any changes you make in `sketch.js` will not have any effect on the gameplay once the game is integrated.
-* Method's and attributes that are inherited from `MiniGame`
+* Methods and attributes that are inherited from `MiniGame`
   * **Must** overwritte
     * `draw`
       * This will be run once per frame.
@@ -36,7 +36,7 @@ An in browser mini-game rush style game with a focus on open source collaboratio
       * Attributes that are reset automatically:
         * `this.gameOver = false`
         * `this.gameWon = false`
-        * `this.startTime = Date.now();`
+        * `this.startTime = Date.now()`
   * Do not overwrite
     * `this.events` - for accessing user input; see user input section below
     * `this.maxSeconds` - max number of seconds to complete game
@@ -48,7 +48,7 @@ An in browser mini-game rush style game with a focus on open source collaboratio
     * `this.gameOver` - whether or not the game is over because of victory, loss, or timing out.  Set to `true` and the game will immediately end.
     * `this.gameWon` - whether or not the game has been won by the user.  Set to `true` once the user has one, this attribute will be checked when the game over event has triggered.
 * User input
-  * User input can can be found in the `this.events` attribute of your game class in `src/game/<yourMiniGameName>/sketch.js`
+  * User input can be found in the `this.events` attribute of your game class in `src/game/<yourMiniGameName>/sketch.js`
   * Available events:
     * Boolean flags in `events`:
       * `this.events.mousePressed` - will be `true` if mouse was pressed this frame
