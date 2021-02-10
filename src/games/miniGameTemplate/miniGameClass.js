@@ -1,6 +1,6 @@
-import MiniGame from '../../miniGameBase.js';
+import { MiniGame } from '../../miniGameBase.js';
 
-export default class YourMiniGame extends MiniGame {
+export class YourMiniGame extends MiniGame {
   constructor() {
     super({ name: 'YourMiniGame Name', instructions: 'Do the thing!' });
   }

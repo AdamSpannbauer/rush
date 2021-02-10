@@ -1,10 +1,10 @@
-import Game from './miniGameClass.js';
+import { YourMiniGame } from './miniGameClass.js';
 
 let game;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  game = new Game();
+  game = new YourMiniGame();
 }
 
 function draw() {

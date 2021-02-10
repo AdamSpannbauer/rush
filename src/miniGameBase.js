@@ -1,4 +1,4 @@
-import Events from './events.js';
+import { Events } from './events.js';
 
 const defaultGameName = (nDigits = 4) => {
   const randNum = random(10 ** (nDigits - 1));
@@ -7,7 +7,7 @@ const defaultGameName = (nDigits = 4) => {
   return `Game #${randNumStr}`;
 };
 
-export default class MiniGame {
+export class MiniGame {
   constructor({ name, instructions = 'Win the game' }) {
     this.name = name || defaultGameName();
     this.instructions = instructions;

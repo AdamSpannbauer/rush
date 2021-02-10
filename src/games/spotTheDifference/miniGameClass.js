@@ -1,7 +1,7 @@
-import MiniGame from '../../miniGameBase.js';
+import { MiniGame } from '../../miniGameBase.js';
 import { drawPolygon, shuffle } from '../../utils.js';
 
-export default class SpotTheDifference extends MiniGame {
+export class SpotTheDifference extends MiniGame {
   constructor() {
     super({
       name: 'Spot the Difference',
