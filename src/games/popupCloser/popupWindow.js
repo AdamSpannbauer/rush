@@ -1,3 +1,5 @@
+import { popupTextLibrary } from "./popupText.js";
+
 export class PopupWindow {
   constructor() {
     this.w = random(width / 6, width / 2);
@@ -15,6 +17,8 @@ export class PopupWindow {
     this.button2X = this.x + this.buttonW * 0.6;
     this.buttonY = this.y + this.buttonH;
 
+    this.popupText = popupTextLibrary[floor(random(popupTextLibrary.length))];
+    this.popupTextY = this.y - this.buttonH;
     this.buttonTextY = this.buttonY + this.buttonH * 0.25;
   }
 
@@ -51,6 +55,8 @@ export class PopupWindow {
     fill(255);
     stroke(0);
     textSize(this.buttonW * 0.2);
+
+    text(this.popupText, this.x, this.popupTextY);
 
     this.answer === "left"
       ? text("Close", this.button1X, this.buttonTextY)

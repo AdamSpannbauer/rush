@@ -36,10 +36,10 @@ export class PopupCloser extends MiniGame {
 
   draw() {
     push();
-    fill(120);
+    fill(80);
     this.popups.forEach((popup, i) => {
       if (i === this.popups.length - 1) {
-        fill(200);
+        fill(150);
       }
       popup.draw();
     });
