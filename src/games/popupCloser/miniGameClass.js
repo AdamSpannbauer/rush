@@ -14,25 +14,35 @@ export class PopupCloser extends MiniGame {
     for (let i = 0; i < this.nPopups; i += 1) {
       this.popups.push(new PopupWindow());
     }
-    // TODO: write a resetGame method (required)
   }
 
   update() {
-    // TODO: write an update method (required)
-    // Examples with events:
-    //  if (this.events.mousePressed) {//do stuff}
-    //  if (this.events.mouseReleased) {//do stuff}
-    //  if (this.events.keyWasPressed('enter')) {//do stuff}
-    //  if (this.events.keyWasReleased('arrowup')) {//do stuff}
+    if (this.events.mousePressed) {
+      const popup = this.popups[this.popups.length - 1];
+      if (popup.click(mouseX, mouseY)) {
+        this.popups.pop();
+      } else if (popup.click(mouseX, mouseY) === false) {
+        this.gameOver = true;
+      } else {
+        return;
+      }
+    }
+
+    if (!this.popups.length) {
+      this.gameWon = true;
+      this.gameOver = true;
+    }
   }
 
   draw() {
     push();
     fill(200);
-    this.popups.forEach((popup) => {
+    this.popups.forEach((popup, i) => {
+      if (i === this.popups.length - 1) {
+        fill(100);
+      }
       popup.draw();
     });
     pop();
-    // TODO: write a draw method (required)
   }
 }
