@@ -6,11 +6,11 @@ export class PopupCloser extends MiniGame {
     super({ name: "Popup Closer", instructions: "Close the popups" });
 
     this.nPopups = 5;
-    this.popups = [];
     this.resetGame();
   }
 
   resetGame() {
+    this.popups = [];
     for (let i = 0; i < this.nPopups; i += 1) {
       this.popups.push(new PopupWindow());
     }
@@ -36,10 +36,10 @@ export class PopupCloser extends MiniGame {
 
   draw() {
     push();
-    fill(200);
+    fill(120);
     this.popups.forEach((popup, i) => {
       if (i === this.popups.length - 1) {
-        fill(100);
+        fill(200);
       }
       popup.draw();
     });

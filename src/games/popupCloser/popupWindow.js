@@ -14,12 +14,15 @@ export class PopupWindow {
     this.button1X = this.x - this.buttonW * 0.6;
     this.button2X = this.x + this.buttonW * 0.6;
     this.buttonY = this.y + this.buttonH;
+
+    this.buttonTextY = this.buttonY + this.buttonH * 0.25;
   }
 
   click(clickX, clickY) {
     const onXLeft = abs(clickX - this.button1X) < this.buttonW / 2;
     const onXRight = abs(clickX - this.button2X) < this.buttonW / 2;
     const onY = abs(clickY - this.buttonY) < this.buttonH / 2;
+
     if ((!onXLeft && !onY) || (!onXRight && !onY)) {
       return;
     }
@@ -37,22 +40,26 @@ export class PopupWindow {
   }
 
   draw() {
+    push();
     rectMode(CENTER);
-    rect(this.x, this.y, this.w, this.h, 10);
-    rect(this.button1X, this.buttonY, this.buttonW, this.buttonH);
     textAlign(CENTER);
+    rect(this.x, this.y, this.w, this.h, 10);
 
-    if (this.answer === "left") {
-      text("close", this.button1X, this.buttonY);
-    } else {
-      text("virus", this.button1X, this.buttonY);
-    }
-
+    rect(this.button1X, this.buttonY, this.buttonW, this.buttonH);
     rect(this.button2X, this.buttonY, this.buttonW, this.buttonH);
-    if (this.answer === "right") {
-      text("close", this.button2X, this.buttonY);
-    } else {
-      text("virus", this.button2X, this.buttonY);
-    }
+
+    fill(255);
+    stroke(0);
+    textSize(this.buttonW * 0.2);
+
+    this.answer === "left"
+      ? text("Close", this.button1X, this.buttonTextY)
+      : text("Virus", this.button1X, this.buttonTextY);
+
+    this.answer === "right"
+      ? text("Close", this.button2X, this.buttonTextY)
+      : text("Virus", this.button2X, this.buttonTextY);
+
+    pop();
   }
 }
