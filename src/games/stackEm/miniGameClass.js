@@ -1,15 +1,20 @@
 import { MiniGame } from '../../miniGameBase.js';
 import { BlockRow } from './blockRow.js';
 
+const DEFAULT_WIN_HEIGHT = 4;
+
 export class StackEm extends MiniGame {
   constructor() {
-    super({ name: 'Stack Em', instructions: 'Stack with Click' });
+    super({ name: 'Stack Em', instructions: `Stack ${DEFAULT_WIN_HEIGHT}!` });
 
     this.rows = [];
 
-    this.rowLen = 4;
+    this.firstRowLen = 4;
     this.gridWidth = 7;
-    this.gridHeight = 5;
+    this.winHeight = DEFAULT_WIN_HEIGHT;
+
+    this.moveCoolDown = 3;
+    this.moveCoolDownCounter = 0;
 
     this.resetGame();
   }
@@ -20,29 +25,64 @@ export class StackEm extends MiniGame {
 
   resetGame() {
     this.rows = [];
+    this.moveCoolDownCounter = 0;
+    this.blockSize = 0;
     this.addRow();
   }
 
   addRow() {
     const y = this.rows.length;
-    const len = y ? this.topRow.length : this.rowLen;
+    const length = y ? this.topRow.length : this.firstRowLen;
+    if (!this.rows) {
+      // First row
+      this.rows.push(new BlockRow({
+        y, length, gridWidth: this.gridWidth,
+      }));
+    } else {
+      // Generate next rows based of previous row
+      this.rows.push(new BlockRow({
+        prevRow: this.topRow,
+      }));
+    }
+  }
 
-    this.rows.push(new BlockRow({
-      y, len, gridWidth: this.gridWidth, gridHeight: this.gridHeight,
-    }));
+  checkWin() {
+    // Player wins if top row is stopped at win height
+    if (!this.topRow.active && this.topRow.length && this.topRow.y >= this.winHeight) {
+      this.gameWon = true;
+      this.gameOver = true;
+    }
+  }
+
+  checkLoss() {
+    this.gameOver = this.topRow.length === 0;
   }
 
   update() {
+    if (this.gameOver) return;
+
     if (this.topRow.active) {
       // Stop row if click or space bar pressed
       const deactivate = this.events.mousePressed || this.events.keyWasPressed(' ');
+
       this.topRow.update(deactivate);
+      this.checkWin();
     } else {
       this.addRow();
+      this.checkLoss();
     }
   }
 
   draw() {
+    const { blockWidth } = this.rows[0];
+    const pixelWinHeight = height - blockWidth * (this.winHeight + 1);
+
+    push();
+    stroke(255);
+    strokeWeight(10);
+    line(0, pixelWinHeight, width, pixelWinHeight);
+    pop();
+
     this.rows.forEach((row) => row.draw());
   }
 }

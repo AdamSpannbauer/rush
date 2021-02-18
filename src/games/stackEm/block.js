@@ -1,17 +1,16 @@
 export class Block {
   constructor({
-    x, y, gridWidth, gridHeight,
+    x, y, gridWidth,
   }) {
     this.x = x;
     this.y = y;
     this.gridWidth = gridWidth;
-    this.gridHeight = gridHeight;
 
     this.w = width / this.gridWidth;
   }
 
   get pixelX() {
-    return this.x * this.w;
+    return round(this.x) * this.w;
   }
 
   get pixelY() {
