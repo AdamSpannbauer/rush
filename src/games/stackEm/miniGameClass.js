@@ -10,8 +10,9 @@ export class StackEm extends MiniGame {
     this.rows = [];
 
     this.firstRowLen = 4;
-    this.gridWidth = 7;
     this.winHeight = DEFAULT_WIN_HEIGHT;
+    this.gridWidth = 7;
+    this.minGridHeight = this.winHeight + 1;
 
     this.moveCoolDown = 3;
     this.moveCoolDownCounter = 0;
@@ -36,7 +37,7 @@ export class StackEm extends MiniGame {
     if (!this.rows) {
       // First row
       this.rows.push(new BlockRow({
-        y, length, gridWidth: this.gridWidth,
+        y, length, gridWidth: this.gridWidth, minGridHeight: this.minGridHeight,
       }));
     } else {
       // Generate next rows based of previous row
@@ -76,11 +77,20 @@ export class StackEm extends MiniGame {
   draw() {
     const { blockWidth } = this.rows[0];
     const pixelWinHeight = height - blockWidth * this.winHeight;
+    const pixelGridWidth = blockWidth * this.gridWidth;
+    const x0 = (width - pixelGridWidth) / 2;
+    const x1 = x0 + pixelGridWidth;
 
     push();
     stroke(255);
     strokeWeight(10);
-    line(0, pixelWinHeight, width, pixelWinHeight);
+    strokeCap(SQUARE);
+    line(x0, pixelWinHeight, x1, pixelWinHeight);
+
+    noStroke();
+    fill(30, 200);
+    rect(0, 0, x0, height);
+    rect(x1, 0, width, height);
     pop();
 
     this.rows.forEach((row) => row.draw());

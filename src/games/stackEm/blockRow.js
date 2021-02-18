@@ -2,12 +2,13 @@ import { Block } from './block.js';
 
 export class BlockRow {
   constructor({
-    y = 0, length = 4, gridWidth = 7, prevRow = null,
+    y = 0, length = 4, gridWidth = 7, minGridHeight = 6, prevRow = null,
   }) {
     this.active = true;
     this.blocks = [];
 
     this.gridWidth = gridWidth;
+    this.minGridHeight = minGridHeight;
 
     this.velocity = 1;
     this.speed = 0.05;
@@ -53,6 +54,7 @@ export class BlockRow {
         x: i,
         y: this.y,
         gridWidth: this.gridWidth,
+        minGridHeight: this.minGridHeight,
       }));
     }
   }
