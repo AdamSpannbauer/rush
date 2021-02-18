@@ -1,7 +1,7 @@
 import { MiniGame } from '../../miniGameBase.js';
 import { BlockRow } from './blockRow.js';
 
-const DEFAULT_WIN_HEIGHT = 4;
+const DEFAULT_WIN_HEIGHT = 5;
 
 export class StackEm extends MiniGame {
   constructor() {
@@ -48,7 +48,7 @@ export class StackEm extends MiniGame {
 
   checkWin() {
     // Player wins if top row is stopped at win height
-    if (!this.topRow.active && this.topRow.length && this.topRow.y >= this.winHeight) {
+    if (!this.topRow.active && this.topRow.length && this.topRow.y + 1 >= this.winHeight) {
       this.gameWon = true;
       this.gameOver = true;
     }
@@ -75,7 +75,7 @@ export class StackEm extends MiniGame {
 
   draw() {
     const { blockWidth } = this.rows[0];
-    const pixelWinHeight = height - blockWidth * (this.winHeight + 1);
+    const pixelWinHeight = height - blockWidth * this.winHeight;
 
     push();
     stroke(255);
