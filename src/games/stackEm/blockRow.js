@@ -43,19 +43,43 @@ export class BlockRow {
     return round(this.maxX);
   }
 
+  generateBlock(x) {
+    const block = new Block({
+      x,
+      y: this.y,
+      gridWidth: this.gridWidth,
+      minGridHeight: this.minGridHeight,
+    });
+
+    this.blocks.push(block);
+  }
+
+  generateRowLeft(len) {
+    const minX = 0;
+    const maxX = len;
+    for (let x = minX; x < maxX; x += 1) {
+      this.generateBlock(x);
+    }
+  }
+
+  generateRowRight(len) {
+    const minX = this.gridWidth - len;
+    const maxX = this.gridWidth;
+    for (let x = minX; x < maxX; x += 1) {
+      this.generateBlock(x);
+    }
+  }
+
   generateRow(length) {
     let len = length;
     if (this.prevRow) {
       len = this.prevRow.length;
     }
 
-    for (let i = 0; i < len; i += 1) {
-      this.blocks.push(new Block({
-        x: i,
-        y: this.y,
-        gridWidth: this.gridWidth,
-        minGridHeight: this.minGridHeight,
-      }));
+    if (random() > 0.5) {
+      this.generateRowLeft(len);
+    } else {
+      this.generateRowRight(len);
     }
   }
 
