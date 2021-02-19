@@ -1,14 +1,22 @@
-import { MiniGame } from '../../miniGameBase.js';
+import { MiniGame } from "../../miniGameBase.js";
 
 export class WaterGunRace extends MiniGame {
   constructor() {
-    super({ name: 'Water Gun Race', instructions: 'Hit the Target!' });
+    super({ name: "Water Gun Race", instructions: "Hit the Target!" });
+
+    this.instructions.inputs = {
+      usesMouseClick: false,
+      usesMouseHover: true,
+      usesArrowKeys: false,
+      usesSpaceBar: false,
+      usesSpecificKeys: [],
+    };
 
     this.ballR = 90;
     this.targetR = this.ballR / 4;
 
-    this.minX = (width / 2) - width * 0.25;
-    this.maxX = (width / 2) + width * 0.25;
+    this.minX = width / 2 - width * 0.25;
+    this.maxX = width / 2 + width * 0.25;
     this.minY = height / 2;
     this.maxY = height;
 
@@ -51,7 +59,7 @@ export class WaterGunRace extends MiniGame {
 
     const mouseTargetDist = dist(this.x, this.y, mouseX, mouseY);
     if (mouseTargetDist < this.targetR && frameRate() > 0) {
-      this.timeOnTarget += (1 / frameRate());
+      this.timeOnTarget += 1 / frameRate();
     }
   }
 
@@ -70,7 +78,14 @@ export class WaterGunRace extends MiniGame {
   }
 
   draw() {
-    const horseX = map(this.percentOnTarget, 0, this.successPercent, 0, width, true);
+    const horseX = map(
+      this.percentOnTarget,
+      0,
+      this.successPercent,
+      0,
+      width,
+      true
+    );
 
     push();
     fill(255);
@@ -78,9 +93,9 @@ export class WaterGunRace extends MiniGame {
     ellipse(this.x, this.y, this.ballR * 2);
 
     fill(255, 100, 100);
-    ellipse(this.x, this.y, (this.ballR * 0.75) * 2);
+    ellipse(this.x, this.y, this.ballR * 0.75 * 2);
     fill(255);
-    ellipse(this.x, this.y, (this.ballR * 0.5) * 2);
+    ellipse(this.x, this.y, this.ballR * 0.5 * 2);
     fill(255, 100, 100);
     ellipse(this.x, this.y, this.targetR * 2);
     pop();

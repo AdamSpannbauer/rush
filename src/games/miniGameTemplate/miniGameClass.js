@@ -1,8 +1,16 @@
-import { MiniGame } from '../../miniGameBase.js';
+import { MiniGame } from "../../miniGameBase.js";
 
 export class YourMiniGame extends MiniGame {
   constructor() {
-    super({ name: 'YourMiniGame Name', instructions: 'Do the thing!' });
+    super({ name: "YourMiniGame Name", instructions: "Do the thing!" });
+
+    this.instructions.inputs = {
+      usesMouseClick: false,
+      usesMouseHover: false,
+      usesArrowKeys: false,
+      usesSpaceBar: false,
+      usesSpecificKeys: [],
+    };
   }
 
   resetGame() {
@@ -11,7 +19,6 @@ export class YourMiniGame extends MiniGame {
 
   update() {
     // TODO: write an update method (required)
-
     // Examples with events:
     //  if (this.events.mousePressed) {//do stuff}
     //  if (this.events.mouseReleased) {//do stuff}

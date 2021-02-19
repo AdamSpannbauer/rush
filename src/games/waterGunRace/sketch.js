@@ -1,4 +1,4 @@
-import { WaterGunRace } from './waterGunRace.js';
+import { WaterGunRace } from "./miniGameClass.js";
 
 let game;
 

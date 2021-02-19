@@ -1,4 +1,4 @@
-import { shuffle } from './utils.js';
+import { shuffle } from "./utils.js";
 
 export class Arcade {
   constructor({ games, lives = 5, events = {} }) {
@@ -50,8 +50,6 @@ export class Arcade {
       this.activeGame = this.games[i];
       this.activeGame.events = this.events;
       this.activeGame.reset();
-    } else {
-      // this.updateSelectScreen();
     }
   }
 
@@ -80,17 +78,7 @@ export class Arcade {
 
   drawInstructions() {
     if (this.activeGame.percentElapsed > 0.2) return;
-
-    push();
-    textAlign(CENTER, CENTER);
-    textSize(100);
-
-    fill(0);
-    stroke(255);
-    strokeWeight(3);
-
-    text(`${this.activeGame.instructions}`, width / 2, height - textSize());
-    pop();
+    this.activeGame.instructions.draw();
   }
 
   drawHUD() {
@@ -111,9 +99,9 @@ export class Arcade {
     strokeWeight(3);
 
     text(
-      `GAME OVER\n${this.gamesWon} game${this.gamesWon === 1 ? '' : 's'} won`,
+      `GAME OVER\n${this.gamesWon} game${this.gamesWon === 1 ? "" : "s"} won`,
       width / 2,
-      height / 2,
+      height / 2
     );
     pop();
   }
@@ -127,26 +115,6 @@ export class Arcade {
       this.drawHUD();
     } else if (this.gameOver) {
       this.drawGameOver();
-    } else {
-      this.drawSelectScreen();
     }
-  }
-
-  updateSelectScreen() {
-    // TODO: write logic to start game (include some difficulty selection)
-  }
-
-  drawSelectScreen() {
-    // TODO: make this pretty
-    push();
-    translate(width / 2, 0);
-    textAlign(CENTER, CENTER);
-
-    const lineHeight = textSize() * 1.5;
-
-    this.games.forEach((g, i) => {
-      text(g.name, 0, i * lineHeight);
-    });
-    pop();
   }
 }
