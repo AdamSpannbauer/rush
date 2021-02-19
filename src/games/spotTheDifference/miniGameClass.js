@@ -1,11 +1,11 @@
-import { MiniGame } from "../../miniGameBase.js";
-import { drawPolygon, shuffle } from "../../utils.js";
+import { MiniGame } from '../../miniGameBase.js';
+import { drawPolygon, shuffle } from '../../utils.js';
 
 export class SpotTheDifference extends MiniGame {
   constructor() {
     super({
-      name: "Spot the Difference",
-      instructions: "Spot the Difference",
+      name: 'Spot the Difference',
+      instructions: 'Spot the Difference',
     });
 
     this.instructions.inputs = {

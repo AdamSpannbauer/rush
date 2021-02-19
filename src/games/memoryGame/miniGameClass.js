@@ -1,11 +1,11 @@
-import { MiniGame } from "../../miniGameBase.js";
-import { drawPolygon } from "../../utils.js";
+import { MiniGame } from '../../miniGameBase.js';
+import { drawPolygon } from '../../utils.js';
 
 export class MemoryGame extends MiniGame {
   constructor() {
     super({
-      name: "Memory Game",
-      instructions: "Memorize the shapes",
+      name: 'Memory Game',
+      instructions: 'Memorize the shapes',
       props: {},
     });
 
@@ -62,7 +62,7 @@ export class MemoryGame extends MiniGame {
           0,
           this.answerKey.length - 1,
           this.minOptionsX,
-          this.maxOptionsX
+          this.maxOptionsX,
         );
 
         const d = dist(mouseX, mouseY, x, this.optionsY);
@@ -118,7 +118,7 @@ export class MemoryGame extends MiniGame {
       0,
       this.answerKey.length - 1,
       this.minOptionsX,
-      this.maxOptionsX
+      this.maxOptionsX,
     );
 
     let y = this.optionsY;
@@ -140,7 +140,7 @@ export class MemoryGame extends MiniGame {
         0,
         this.answerKey.length - 1,
         this.minX,
-        this.maxX
+        this.maxX,
       );
       ellipse(answerX, answersY, this.radius * 2.4);
 

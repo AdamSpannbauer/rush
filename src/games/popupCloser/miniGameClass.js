@@ -1,9 +1,9 @@
-import { MiniGame } from "../../miniGameBase.js";
-import { PopupWindow } from "./popupWindow.js";
+import { MiniGame } from '../../miniGameBase.js';
+import { PopupWindow } from './popupWindow.js';
 
 export class PopupCloser extends MiniGame {
   constructor() {
-    super({ name: "Popup Closer", instructions: "Close the popups" });
+    super({ name: 'Popup Closer', instructions: 'Close the popups' });
 
     this.instructions.inputs = {
       usesMouseClick: true,

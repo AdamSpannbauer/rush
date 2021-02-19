@@ -1,4 +1,4 @@
-import { popupTextLibrary } from "./popupText.js";
+import { popupTextLibrary } from './popupText.js';
 
 export class PopupWindow {
   constructor() {
@@ -8,7 +8,7 @@ export class PopupWindow {
     this.x = random(this.w / 2, width - this.w / 2);
     this.y = random(this.h / 2, height - this.h / 2);
 
-    this.answer = random(["left", "right"]);
+    this.answer = random(['left', 'right']);
 
     this.buttonW = this.w * 0.1 + width * 0.05;
     this.buttonH = this.buttonW * 0.3;
@@ -32,15 +32,14 @@ export class PopupWindow {
     }
 
     if (
-      (onXLeft && onY && this.answer !== "left") ||
-      (onXRight && onY && this.answer !== "right")
+      (onXLeft && onY && this.answer !== 'left')
+      || (onXRight && onY && this.answer !== 'right')
     ) {
       return false;
-    } else if (onXRight && onY && this.answer === "right") {
-      return true;
-    } else {
+    } if (onXRight && onY && this.answer === 'right') {
       return true;
     }
+    return true;
   }
 
   draw() {
@@ -58,13 +57,13 @@ export class PopupWindow {
 
     text(this.popupText, this.x, this.popupTextY);
 
-    this.answer === "left"
-      ? text("Close", this.button1X, this.buttonTextY)
-      : text("Virus", this.button1X, this.buttonTextY);
+    this.answer === 'left'
+      ? text('Close', this.button1X, this.buttonTextY)
+      : text('Virus', this.button1X, this.buttonTextY);
 
-    this.answer === "right"
-      ? text("Close", this.button2X, this.buttonTextY)
-      : text("Virus", this.button2X, this.buttonTextY);
+    this.answer === 'right'
+      ? text('Close', this.button2X, this.buttonTextY)
+      : text('Virus', this.button2X, this.buttonTextY);
 
     pop();
   }

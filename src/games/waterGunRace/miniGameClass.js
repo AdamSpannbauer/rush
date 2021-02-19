@@ -1,8 +1,8 @@
-import { MiniGame } from "../../miniGameBase.js";
+import { MiniGame } from '../../miniGameBase.js';
 
 export class WaterGunRace extends MiniGame {
   constructor() {
-    super({ name: "Water Gun Race", instructions: "Hit the Target!" });
+    super({ name: 'Water Gun Race', instructions: 'Hit the Target!' });
 
     this.instructions.inputs = {
       usesMouseClick: false,
@@ -84,7 +84,7 @@ export class WaterGunRace extends MiniGame {
       this.successPercent,
       0,
       width,
-      true
+      true,
     );
 
     push();

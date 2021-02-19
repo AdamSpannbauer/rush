@@ -1,12 +1,12 @@
-import { Arcade } from "./src/arcade.js";
-import { Events } from "./src/events.js";
-import { GAMES_LIST } from "./src/gamesList.js";
+import { Arcade } from './src/arcade.js';
+import { Events } from './src/events.js';
+import { GAMES_LIST } from './src/gamesList.js';
 
 let arcade;
 let fontAwesome;
 
 function preload() {
-  fontAwesome = loadFont("./src/assets/font-awesome.otf");
+  fontAwesome = loadFont('./src/assets/font-awesome.otf');
 }
 
 function setup() {
@@ -14,6 +14,7 @@ function setup() {
   const games = GAMES_LIST.map((Game) => new Game());
 
   games.forEach((game) => {
+    // eslint-disable-next-line no-param-reassign
     game.instructions.fontAwesome = fontAwesome;
   });
 

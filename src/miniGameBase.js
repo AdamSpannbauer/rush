@@ -1,8 +1,8 @@
-import { Events } from "./events.js";
-import { Instructions } from "./instructions.js";
+import { Events } from './events.js';
+import { Instructions } from './instructions.js';
 
 export class MiniGame {
-  constructor({ name, instructions = "Win the game" }) {
+  constructor({ name, instructions = 'Win the game' }) {
     this.name = name;
     this.instructions = new Instructions({ text: instructions });
     this.events = new Events();
@@ -45,19 +45,19 @@ export class MiniGame {
   // eslint-disable-next-line class-methods-use-this
   resetGame() {
     throw new TypeError(
-      "MiniGame subclasses must define an `resetGame()` method."
+      'MiniGame subclasses must define an `resetGame()` method.',
     );
   }
 
   // eslint-disable-next-line class-methods-use-this
   update() {
     throw new TypeError(
-      "MiniGame subclasses must define an `update()` method."
+      'MiniGame subclasses must define an `update()` method.',
     );
   }
 
   // eslint-disable-next-line class-methods-use-this
   draw() {
-    throw new TypeError("MiniGame subclasses must define a `draw()` method.");
+    throw new TypeError('MiniGame subclasses must define a `draw()` method.');
   }
 }

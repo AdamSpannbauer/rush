@@ -1,8 +1,8 @@
-import { MiniGame } from "../../miniGameBase.js";
+import { MiniGame } from '../../miniGameBase.js';
 
 export class FindTheDude extends MiniGame {
   constructor() {
-    super({ name: "Find the Dude", instructions: "Find the Dude!" });
+    super({ name: 'Find the Dude', instructions: 'Find the Dude!' });
 
     this.instructions.inputs = {
       usesMouseClick: false,
