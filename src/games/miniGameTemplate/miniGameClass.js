@@ -9,7 +9,7 @@ export class YourMiniGame extends MiniGame {
       usesMouseHover: false,
       usesArrowKeys: false,
       usesSpaceBar: false,
-      usesSpecificKeys: [],
+      usesKeyboard: false,
     };
   }
 

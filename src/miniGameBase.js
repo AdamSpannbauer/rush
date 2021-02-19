@@ -1,18 +1,9 @@
 import { Events } from "./events.js";
 import { Instructions } from "./instructions.js";
 
-const defaultGameName = (nDigits = 4) => {
-  const randNum = random(10 ** (nDigits - 1));
-  const randNumStr = randNum.toLocaleString("en-US", {
-    minimumIntegerDigits: nDigits,
-  });
-
-  return `Game #${randNumStr}`;
-};
-
 export class MiniGame {
   constructor({ name, instructions = "Win the game" }) {
-    this.name = name || defaultGameName();
+    this.name = name;
     this.instructions = new Instructions({ text: instructions });
     this.events = new Events();
 
@@ -27,7 +18,7 @@ export class MiniGame {
       usesMouseHover: false,
       usesArrowKeys: false,
       usesSpaceBar: false,
-      usesSpecificKeys: [],
+      usesKeyboard: false,
     };
   }
 

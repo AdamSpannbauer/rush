@@ -9,7 +9,7 @@ export class FindTheDude extends MiniGame {
       usesMouseHover: true,
       usesArrowKeys: false,
       usesSpaceBar: false,
-      usesSpecificKeys: [],
+      usesKeyboard: false,
     };
 
     this.dudeX = random(width);

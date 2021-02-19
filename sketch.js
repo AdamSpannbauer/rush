@@ -1,16 +1,22 @@
-import { Arcade } from './src/arcade.js';
-import { Events } from './src/events.js';
-import { GAMES_LIST } from './src/gamesList.js';
+import { Arcade } from "./src/arcade.js";
+import { Events } from "./src/events.js";
+import { GAMES_LIST } from "./src/gamesList.js";
 
 let arcade;
+let fontAwesome;
 
 function preload() {
-  // TODO: Eventually consider loading assets here
+  fontAwesome = loadFont("./src/assets/font-awesome.otf");
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   const games = GAMES_LIST.map((Game) => new Game());
+
+  games.forEach((game) => {
+    game.instructions.fontAwesome = fontAwesome;
+  });
+
   arcade = new Arcade({
     games,
     lives: 3,

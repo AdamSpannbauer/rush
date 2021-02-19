@@ -13,7 +13,7 @@ export class SpotTheDifference extends MiniGame {
       usesMouseHover: false,
       usesArrowKeys: false,
       usesSpaceBar: false,
-      usesSpecificKeys: [],
+      usesKeyboard: false,
     };
 
     this.answerKey = [0, 0, 0, 1];

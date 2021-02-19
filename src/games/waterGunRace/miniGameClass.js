@@ -9,7 +9,7 @@ export class WaterGunRace extends MiniGame {
       usesMouseHover: true,
       usesArrowKeys: false,
       usesSpaceBar: false,
-      usesSpecificKeys: [],
+      usesKeyboard: false,
     };
 
     this.ballR = 90;

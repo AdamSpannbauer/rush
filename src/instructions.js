@@ -2,13 +2,14 @@ export class Instructions {
   constructor({ text = "Win the game!", fontSize = 100 }) {
     this.text = text;
     this.fontSize = fontSize;
+    this.fontAwesome = null;
 
     this.inputs = {
       usesMouseClick: false,
       usesMouseHover: false,
       usesArrowKeys: false,
       usesSpaceBar: false,
-      usesSpecificKeys: [],
+      usesKeyboard: false,
     };
 
     push();
@@ -22,27 +23,31 @@ export class Instructions {
     let inputText = "";
 
     if (this.inputs.usesMouseClick) {
-      inputText += "Use mouse ";
+      inputText += "\uf8cc Click ";
     }
     if (this.inputs.usesMouseHover) {
-      inputText += "Hover mouse  ";
+      inputText += "\uf245 Hover ";
     }
     if (this.inputs.usesArrowKeys) {
-      inputText += "Use arrow keys ";
+      inputText += "\uf0b2 Arrow Keys ";
     }
     if (this.inputs.usesSpaceBar) {
-      inputText += "Use space bar ";
+      inputText += "\uf11c Space Bar ";
     }
-    if (this.inputs.usesSpecificKeys.length) {
-      inputText += "Use mouse ";
+    if (this.inputs.usesKeyboard) {
+      inputText += "\uf11c Keyboard ";
     }
 
-    this.inputString = inputText;
+    this.inputString = inputText.trim();
   }
 
   drawInputString() {
     this.buildInputString();
-    text(this.inputString, width / 2, height - this.fontSize);
+    push();
+    textSize(this.fontSize * 0.5);
+    textFont(this.fontAwesome);
+    text(this.inputString, width / 2, height / 2 + this.fontSize * 1.5);
+    pop();
   }
 
   formatText() {

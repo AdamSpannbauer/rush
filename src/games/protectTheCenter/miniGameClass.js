@@ -9,7 +9,7 @@ export class ProtectTheCenter extends MiniGame {
       usesMouseHover: false,
       usesArrowKeys: false,
       usesSpaceBar: false,
-      usesSpecificKeys: [],
+      usesKeyboard: false,
     };
 
     this.homeBaseR = 50;
