@@ -1,12 +1,15 @@
 import { shuffle } from './utils.js';
 
 export class Arcade {
-  constructor({ games, lives = 5, events = {} }) {
+  constructor({
+    games, lives = 5, events = {}, fontAwesome = null,
+  }) {
     this.games = games;
     shuffle(this.games);
 
     this.lives = lives;
     this.events = events;
+    this.fontAwesome = fontAwesome;
 
     this.activeGameIndex = 0;
     this.activeGame = null;
@@ -63,16 +66,18 @@ export class Arcade {
   }
 
   drawLives() {
-    // TODO: replace with nicer graphic for lives
+    // TODO: revisit icon choice
+    const lifeIcon = '\uf2bd ';
     push();
     textAlign(CENTER, CENTER);
-    textSize(30);
+    textSize(50);
 
     fill(0);
     stroke(255);
     strokeWeight(3);
 
-    text(`Lives remaining: ${this.lives}`, width / 2, textSize() * 2);
+    textFont(this.fontAwesome);
+    text(`${lifeIcon.repeat(this.lives)}`, width / 2, textSize());
     pop();
   }
 

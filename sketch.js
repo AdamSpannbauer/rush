@@ -22,6 +22,7 @@ function setup() {
     games,
     lives: 3,
     events: new Events(),
+    fontAwesome,
   });
 }
 
