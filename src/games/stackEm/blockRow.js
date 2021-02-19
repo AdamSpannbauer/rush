@@ -120,6 +120,12 @@ export class BlockRow {
   }
 
   draw() {
+    push();
+    if (!this.active) {
+      fill(200, 200);
+    }
+
     this.blocks.forEach((b) => b.draw());
+    pop();
   }
 }
