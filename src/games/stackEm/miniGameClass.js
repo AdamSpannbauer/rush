@@ -7,6 +7,14 @@ export class StackEm extends MiniGame {
   constructor() {
     super({ name: 'Stack Em', instructions: `Stack ${DEFAULT_WIN_HEIGHT}!` });
 
+    this.instructions.inputs = {
+      usesMouseClick: true,
+      usesMouseHover: false,
+      usesArrowKeys: false,
+      usesSpaceBar: false,
+      usesKeyboard: false,
+    };
+
     this.rows = [];
 
     this.firstRowLen = 4;
