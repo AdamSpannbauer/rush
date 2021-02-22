@@ -1,5 +1,7 @@
 import { Block } from './block.js';
 
+const roundToNearest = (x, nearest = 1) => (round(x * (1 / nearest)) / (1 / nearest));
+
 export class BlockRow {
   constructor({
     y = 0, length = 4, gridWidth = 7, minGridHeight = 6, prevRow = null,
@@ -10,8 +12,8 @@ export class BlockRow {
     this.gridWidth = gridWidth;
     this.minGridHeight = minGridHeight;
 
-    this.velocity = 1;
     this.speed = 0.05;
+    this.velocity = this.speed;
 
     this.y = prevRow ? prevRow.y + 1 : y;
     this.prevRow = prevRow;
@@ -78,8 +80,10 @@ export class BlockRow {
 
     if (random() > 0.5) {
       this.generateRowLeft(len);
+      this.velocity = this.speed;
     } else {
       this.generateRowRight(len);
+      this.velocity = -this.speed;
     }
   }
 
@@ -92,7 +96,7 @@ export class BlockRow {
 
     this.blocks.forEach((b) => {
       // eslint-disable-next-line no-param-reassign
-      b.x += this.velocity;
+      b.x = roundToNearest(b.x + this.velocity, this.velocity);
     });
   }
 
