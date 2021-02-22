@@ -9,6 +9,14 @@ export class MemoryGame extends MiniGame {
       props: {},
     });
 
+    this.instructions.inputs = {
+      usesMouseClick: true,
+      usesMouseHover: false,
+      usesArrowKeys: false,
+      usesSpaceBar: false,
+      usesKeyboard: false,
+    };
+
     this.memoryStart = Date.now();
     this.totalMemorySeconds = 2.5;
 

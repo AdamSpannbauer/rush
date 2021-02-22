@@ -8,6 +8,14 @@ export class SpotTheDifference extends MiniGame {
       instructions: 'Spot the Difference',
     });
 
+    this.instructions.inputs = {
+      usesMouseClick: true,
+      usesMouseHover: false,
+      usesArrowKeys: false,
+      usesSpaceBar: false,
+      usesKeyboard: false,
+    };
+
     this.answerKey = [0, 0, 0, 1];
     shuffle(this.answerKey);
 

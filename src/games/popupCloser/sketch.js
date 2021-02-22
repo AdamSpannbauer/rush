@@ -1,7 +1,7 @@
 // Replace `YourMiniGame` in the import statement
 // below.  Do not change the alias UserMiniGame as it is used
 // in the remainder of this script.
-import { PopupCloser as UserMiniGame } from "./miniGameClass.js";
+import { PopupCloser as UserMiniGame } from './miniGameClass.js';
 
 let game;
 

@@ -4,6 +4,14 @@ export class ProtectTheCenter extends MiniGame {
   constructor() {
     super({ name: 'Protect the Center', instructions: 'Protect the center!' });
 
+    this.instructions.inputs = {
+      usesMouseClick: true,
+      usesMouseHover: false,
+      usesArrowKeys: false,
+      usesSpaceBar: false,
+      usesKeyboard: false,
+    };
+
     this.homeBaseR = 50;
 
     this.spawnEveryNFrames = 10;

@@ -4,6 +4,14 @@ export class FindTheDude extends MiniGame {
   constructor() {
     super({ name: 'Find the Dude', instructions: 'Find the Dude!' });
 
+    this.instructions.inputs = {
+      usesMouseClick: false,
+      usesMouseHover: true,
+      usesArrowKeys: false,
+      usesSpaceBar: false,
+      usesKeyboard: false,
+    };
+
     this.dudeX = random(width);
     this.dudeY = random(height);
     this.dudeR = 15;
