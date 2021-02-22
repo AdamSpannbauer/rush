@@ -11,12 +11,32 @@ export class Arcade {
     this.events = events;
     this.fontAwesome = fontAwesome;
 
+    this.maxGameIntroSeconds = 2;
+    this.gameIntroStartTime = Date.now();
+
     this.activeGameIndex = 0;
     this.activeGame = null;
     // TODO: have player decide when rush starts
     this.rushStarted = true;
     this.gamesWon = 0;
     this.gameOver = false;
+
+    this.setUpNextGame();
+  }
+
+  get showingGameIntro() {
+    const elapsed = Date.now() - this.gameIntroStartTime;
+    return this.maxGameIntroSeconds > elapsed / 1000;
+  }
+
+  setUpNextGame() {
+    this.activeGameIndex += 1;
+    const i = this.activeGameIndex % this.games.length;
+
+    this.activeGame = this.games[i];
+    this.activeGame.events = this.events;
+
+    this.gameIntroStartTime = Date.now();
   }
 
   updateActiveGame() {
@@ -32,32 +52,26 @@ export class Arcade {
         this.gamesWon += 1;
       }
 
-      this.activeGame = null;
+      this.setUpNextGame();
     } else {
       this.activeGame.update();
     }
   }
 
   update() {
-    if (this.activeGame && !this.gameOver) {
+    if (!this.showingGameIntro && !this.gameOver) {
       this.updateActiveGame();
 
       if (this.lives <= 0) {
         this.gameOver = true;
         this.activeGame = null;
       }
-    } else if (!this.activeGame && this.rushStarted && !this.gameOver) {
-      this.activeGameIndex += 1;
-      const i = this.activeGameIndex % this.games.length;
-
-      this.activeGame = this.games[i];
-      this.activeGame.events = this.events;
+    } else if (this.showingGameIntro && this.rushStarted && !this.gameOver) {
       this.activeGame.reset();
     }
   }
 
   drawTimer() {
-    // TODO: replace with nicer graphic for time
     push();
     fill(255, 100);
     stroke(0);
@@ -66,8 +80,19 @@ export class Arcade {
   }
 
   drawLives() {
-    // TODO: revisit icon choice
-    const lifeIcon = '\uf2bd ';
+    let lifeIcon;
+
+    if (this.lives > 2) {
+      // lifeIcon = '\uf007 '; // user
+      lifeIcon = '\uf118 '; // smile face
+    } else if (this.lives === 2) {
+      // lifeIcon = '\uf128 '; // injured user
+      lifeIcon = '\uf11a '; // meh face
+    } else if (this.lives === 1) {
+      // lifeIcon = '\uf683 '; // praying stick man
+      lifeIcon = '\uf119 '; // frown face
+    }
+
     push();
     textAlign(CENTER, CENTER);
     textSize(50);
@@ -82,7 +107,6 @@ export class Arcade {
   }
 
   drawInstructions() {
-    if (this.activeGame.percentElapsed > 0.2) return;
     this.activeGame.instructions.draw();
   }
 
@@ -112,14 +136,21 @@ export class Arcade {
   }
 
   draw() {
-    if (this.activeGame) {
+    if (this.gameOver) {
+      this.drawGameOver();
+      return;
+    }
+
+    if (!this.showingGameIntro && this.activeGame) {
       push();
       this.activeGame.draw();
       pop();
 
-      this.drawHUD();
-    } else if (this.gameOver) {
-      this.drawGameOver();
+      this.drawTimer();
+      this.drawLives();
+    } else {
+      this.drawInstructions();
+      this.drawLives();
     }
   }
 }
