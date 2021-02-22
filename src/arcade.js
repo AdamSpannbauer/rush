@@ -1,12 +1,18 @@
 import { shuffle } from './utils.js';
 
 export class Arcade {
-  constructor({ games, lives = 5, events = {} }) {
+  constructor({
+    games, lives = 5, events = {}, fontAwesome = null,
+  }) {
     this.games = games;
     shuffle(this.games);
 
     this.lives = lives;
     this.events = events;
+    this.fontAwesome = fontAwesome;
+
+    this.maxGameIntroSeconds = 2;
+    this.gameIntroStartTime = Date.now();
 
     this.activeGameIndex = 0;
     this.activeGame = null;
@@ -14,6 +20,23 @@ export class Arcade {
     this.rushStarted = true;
     this.gamesWon = 0;
     this.gameOver = false;
+
+    this.setUpNextGame();
+  }
+
+  get showingGameIntro() {
+    const elapsed = Date.now() - this.gameIntroStartTime;
+    return this.maxGameIntroSeconds > elapsed / 1000;
+  }
+
+  setUpNextGame() {
+    this.activeGameIndex += 1;
+    const i = this.activeGameIndex % this.games.length;
+
+    this.activeGame = this.games[i];
+    this.activeGame.events = this.events;
+
+    this.gameIntroStartTime = Date.now();
   }
 
   updateActiveGame() {
@@ -29,34 +52,26 @@ export class Arcade {
         this.gamesWon += 1;
       }
 
-      this.activeGame = null;
+      this.setUpNextGame();
     } else {
       this.activeGame.update();
     }
   }
 
   update() {
-    if (this.activeGame && !this.gameOver) {
+    if (!this.showingGameIntro && !this.gameOver) {
       this.updateActiveGame();
 
       if (this.lives <= 0) {
         this.gameOver = true;
         this.activeGame = null;
       }
-    } else if (!this.activeGame && this.rushStarted && !this.gameOver) {
-      this.activeGameIndex += 1;
-      const i = this.activeGameIndex % this.games.length;
-
-      this.activeGame = this.games[i];
-      this.activeGame.events = this.events;
+    } else if (this.showingGameIntro && this.rushStarted && !this.gameOver) {
       this.activeGame.reset();
-    } else {
-      // this.updateSelectScreen();
     }
   }
 
   drawTimer() {
-    // TODO: replace with nicer graphic for time
     push();
     fill(255, 100);
     stroke(0);
@@ -65,32 +80,34 @@ export class Arcade {
   }
 
   drawLives() {
-    // TODO: replace with nicer graphic for lives
+    let lifeIcon;
+
+    if (this.lives > 2) {
+      // lifeIcon = '\uf007 '; // user
+      lifeIcon = '\uf118 '; // smile face
+    } else if (this.lives === 2) {
+      // lifeIcon = '\uf128 '; // injured user
+      lifeIcon = '\uf11a '; // meh face
+    } else if (this.lives === 1) {
+      // lifeIcon = '\uf683 '; // praying stick man
+      lifeIcon = '\uf119 '; // frown face
+    }
+
     push();
     textAlign(CENTER, CENTER);
-    textSize(30);
+    textSize(50);
 
     fill(0);
     stroke(255);
     strokeWeight(3);
 
-    text(`Lives remaining: ${this.lives}`, width / 2, textSize() * 2);
+    textFont(this.fontAwesome);
+    text(`${lifeIcon.repeat(this.lives)}`, width / 2, textSize());
     pop();
   }
 
   drawInstructions() {
-    if (this.activeGame.percentElapsed > 0.2) return;
-
-    push();
-    textAlign(CENTER, CENTER);
-    textSize(100);
-
-    fill(0);
-    stroke(255);
-    strokeWeight(3);
-
-    text(`${this.activeGame.instructions}`, width / 2, height - textSize());
-    pop();
+    this.activeGame.instructions.draw();
   }
 
   drawHUD() {
@@ -119,34 +136,21 @@ export class Arcade {
   }
 
   draw() {
-    if (this.activeGame) {
+    if (this.gameOver) {
+      this.drawGameOver();
+      return;
+    }
+
+    if (!this.showingGameIntro && this.activeGame) {
       push();
       this.activeGame.draw();
       pop();
 
-      this.drawHUD();
-    } else if (this.gameOver) {
-      this.drawGameOver();
+      this.drawTimer();
+      this.drawLives();
     } else {
-      this.drawSelectScreen();
+      this.drawInstructions();
+      this.drawLives();
     }
-  }
-
-  updateSelectScreen() {
-    // TODO: write logic to start game (include some difficulty selection)
-  }
-
-  drawSelectScreen() {
-    // TODO: make this pretty
-    push();
-    translate(width / 2, 0);
-    textAlign(CENTER, CENTER);
-
-    const lineHeight = textSize() * 1.5;
-
-    this.games.forEach((g, i) => {
-      text(g.name, 0, i * lineHeight);
-    });
-    pop();
   }
 }
