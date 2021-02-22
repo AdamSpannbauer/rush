@@ -3,7 +3,8 @@ import { MemoryGame } from './games/memoryGame/miniGameClass.js';
 import { PopupCloser } from './games/popupCloser/miniGameClass.js';
 import { ProtectTheCenter } from './games/protectTheCenter/miniGameClass.js';
 import { SpotTheDifference } from './games/spotTheDifference/miniGameClass.js';
-import { WaterGunRace } from './games/waterGunRace/miniGameClass.js';
+import { StackEm } from './games/stackEm/miniGameClass.js';
+import { WaterGunRace } from './games/waterGunRace/waterGunRace.js';
 
 export const GAMES_LIST = [
   WaterGunRace,
@@ -12,4 +13,5 @@ export const GAMES_LIST = [
   ProtectTheCenter,
   MemoryGame,
   PopupCloser,
+  StackEm,
 ];
