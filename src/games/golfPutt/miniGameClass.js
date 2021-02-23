@@ -45,7 +45,9 @@ export class YourMiniGame extends MiniGame {
 
     this.hole = new Hole({ r: this.holeR });
     this.ball = new Ball({ r: this.ballR });
-    this.hitAngle = random(-3 * QUARTER_PI, 3 * QUARTER_PI);
+    this.hitAngle = random(-HALF_PI, HALF_PI);
+    this.deltaAngle = 0.01;
+    this.ballSpeed = max([width, height]) * 0.01;
 
     this.resetHoleXY();
     this.resetBallXY();
@@ -64,15 +66,43 @@ export class YourMiniGame extends MiniGame {
   resetGame() {
     this.resetHoleXY();
     this.resetBallXY();
+    this.distToHole = dist(this.hole.x, this.hole.y, this.ball.x, this.ball.y);
+    this.ballHit = false;
+  }
+
+  checkBallInHole() {
+    this.distToHole = dist(this.hole.x, this.hole.y, this.ball.x, this.ball.y);
+    if (this.distToHole < this.hole.r - this.ball.r) {
+      this.gameOver = true;
+      this.gameWon = true;
+    }
+  }
+
+  moveBall() {
+    const v = createVector(this.ballSpeed, 0);
+    v.rotate(this.hitAngle);
+    this.ball.p.add(v);
   }
 
   update() {
-    // TODO: write an update method (required)
-    // Examples with events:
-    //  if (this.events.mousePressed) {//do stuff}
-    //  if (this.events.mouseReleased) {//do stuff}
-    //  if (this.events.keyWasPressed('enter')) {//do stuff}
-    //  if (this.events.keyWasReleased('arrowup')) {//do stuff}
+    this.checkBallInHole();
+
+    if (this.ballHit) {
+      this.moveBall();
+      return;
+    }
+
+    if (keyIsDown(RIGHT_ARROW)) {
+      this.hitAngle += this.deltaAngle;
+    }
+
+    if (keyIsDown(LEFT_ARROW)) {
+      this.hitAngle -= this.deltaAngle;
+    }
+
+    if (this.events.keyWasPressed(' ')) {
+      this.ballHit = true;
+    }
   }
 
   drawHitAngle() {
@@ -82,8 +112,9 @@ export class YourMiniGame extends MiniGame {
     stroke(250, 250, 0);
     strokeWeight(10);
     strokeCap(SQUARE);
+
     dashedLine({
-      x1: 0, y1: 0, x2: width, y2: 0, nSegments: 5,
+      x1: 0, y1: 0, x2: this.distToHole * 1.1, y2: 0, nSegments: 5,
     });
     pop();
   }
@@ -91,7 +122,7 @@ export class YourMiniGame extends MiniGame {
   draw() {
     background(30, 80, 40);
 
-    this.drawHitAngle();
+    if (!this.ballHit) this.drawHitAngle();
     this.hole.draw();
     this.ball.draw();
   }
