@@ -18,7 +18,7 @@ const dashedLine = ({
   }
 };
 
-export class YourMiniGame extends MiniGame {
+export class GolfPutt extends MiniGame {
   constructor() {
     super({ name: 'Golf Putt', instructions: 'Sink the Putt!' });
 
