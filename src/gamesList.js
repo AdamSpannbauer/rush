@@ -6,6 +6,7 @@ import { SpotTheDifference } from './games/spotTheDifference/miniGameClass.js';
 import { StackEm } from './games/stackEm/miniGameClass.js';
 import { WaterGunRace } from './games/waterGunRace/miniGameClass.js';
 import { GolfPutt } from './games/golfPutt/miniGameClass.js';
+import { ToTheMoon } from './games/toTheMoon/miniGameClass.js';
 
 export const GAMES_LIST = [
   WaterGunRace,
@@ -16,4 +17,5 @@ export const GAMES_LIST = [
   PopupCloser,
   StackEm,
   GolfPutt,
+  ToTheMoon,
 ];
