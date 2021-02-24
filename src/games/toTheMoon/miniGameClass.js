@@ -44,7 +44,7 @@ export class ToTheMoon extends MiniGame {
       fontAwesome: this.fontAwesome,
       iconSize: height * 0.1,
     });
-    this.launchAngle = this.minAngle;
+    this.launchAngle = random(this.minAngle, this.maxAngle);
     this.launched = false;
   }
 
