@@ -91,7 +91,7 @@ export class ToTheMoon extends MiniGame {
     strokeCap(SQUARE);
 
     dashedLine({
-      x1: 0, y1: 0, x2: height, y2: 0, nSegments: 5,
+      x1: this.rocket.iconSize, y1: 0, x2: height, y2: 0, nSegments: 5,
     });
     pop();
   }
