@@ -15,7 +15,7 @@ export class ToTheMoon extends MiniGame {
       usesKeyboard: false,
     };
 
-    const moonR = width * 0.25;
+    const moonR = min([width, height]) * 0.25;
     this.moon = new Moon({ x: width / 2, y: -moonR * 0.25, r: moonR });
     this.rocket = new Rocket({});
 
