@@ -1,22 +1,7 @@
 import { MiniGame } from '../../miniGameBase.js';
+import { dashedLine } from '../../utils.js';
 import { Ball } from './ball.js';
 import { Hole } from './hole.js';
-
-const dashedLine = ({
-  x1, y1, x2, y2, nSegments = 10,
-}) => {
-  let ax;
-  let ay;
-  let bx;
-  let by;
-  for (let i = 1; i < nSegments * 2; i += 2) {
-    ax = map(i - 1, 0, nSegments * 2, x1, x2);
-    ay = map(i - 1, 0, nSegments * 2, y1, y2);
-    bx = map(i, 0, nSegments * 2, x1, x2);
-    by = map(i, 0, nSegments * 2, y1, y2);
-    line(ax, ay, bx, by);
-  }
-};
 
 export class GolfPutt extends MiniGame {
   constructor() {
