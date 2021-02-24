@@ -4,13 +4,20 @@
 import { YourMiniGame as UserMiniGame } from './miniGameClass.js';
 
 let game;
+let fontAwesome;
 
-function setup() {
+window.preload = () => {
+  fontAwesome = loadFont('../../assets/font-awesome.otf');
+};
+
+window.setup = () => {
   createCanvas(windowWidth, windowHeight);
   game = new UserMiniGame();
-}
+  game.fontAwesome = fontAwesome;
+  game.reset();
+};
 
-function draw() {
+window.draw = () => {
   if (game.gameOver) noLoop();
 
   if (game.percentElapsed >= 1) {
@@ -37,10 +44,7 @@ function draw() {
   rect(0, height - 50, width * (1 - game.percentElapsed), 50);
 
   game.events.reset();
-}
-
-window.setup = setup;
-window.draw = draw;
+};
 
 window.mousePressed = () => game.events.logMousePressed();
 window.touchStarted = () => game.events.logMousePressed();

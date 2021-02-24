@@ -16,6 +16,8 @@ function setup() {
   games.forEach((game) => {
     // eslint-disable-next-line no-param-reassign
     game.instructions.fontAwesome = fontAwesome;
+    // eslint-disable-next-line no-param-reassign
+    game.fontAwesome = fontAwesome;
   });
 
   arcade = new Arcade({
