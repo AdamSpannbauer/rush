@@ -92,11 +92,11 @@ export class GolfPutt extends MiniGame {
       return;
     }
 
-    if (keyIsDown(RIGHT_ARROW)) {
+    if (keyIsDown(RIGHT_ARROW) || keyIsDown(DOWN_ARROW)) {
       this.hitAngle += this.deltaAngle;
     }
 
-    if (keyIsDown(LEFT_ARROW)) {
+    if (keyIsDown(LEFT_ARROW) || keyIsDown(UP_ARROW)) {
       this.hitAngle -= this.deltaAngle;
     }
 
