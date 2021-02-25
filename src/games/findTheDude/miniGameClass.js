@@ -53,12 +53,7 @@ export class FindTheDude extends MiniGame {
     push();
     fill(100, 255, 100);
     strokeWeight(3);
-
-    textFont(this.fontAwesome);
-    textSize(this.dudeR * 2);
-    textAlign(CENTER, CENTER);
-
-    text(this.dudeIcon, this.dudeX, this.dudeY);
+    this.drawIcon(this.dudeIcon, this.dudeX, this.dudeY, this.dudeR * 2);
     pop();
   }
 

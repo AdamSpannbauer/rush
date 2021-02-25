@@ -25,20 +25,4 @@ export class Rocket {
   set y(y) {
     this.p.y = y;
   }
-
-  draw() {
-    push();
-    translate(this.x, this.y);
-    rotate(this.launchAngle);
-    // rocket icon is tilted to right; correcting to make straight up
-    rotate(QUARTER_PI);
-
-    textSize(this.iconSize);
-    textFont(this.fontAwesome);
-    textAlign(CENTER, CENTER);
-    fill(200);
-
-    text(this.icon, 0, 0);
-    pop();
-  }
 }
