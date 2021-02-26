@@ -129,6 +129,9 @@ if declare -f "util_$1" >/dev/null 2>&1; then
   shift
   "$func" "$@"
 else
-  echo "Function $1 not recognized" >&2
+  printf "\nCommand '%s' not recognized" $1
+  printf "\n\n Valid commands are:"
+  printf "\n  $ ./utils.sh new [gameName]"
+  printf "\n  $ ./utils.sh update_templates\n\n"
   exit 1
 fi
