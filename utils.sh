@@ -77,8 +77,8 @@ util_new() {
   # with user provided name
   local new_sketch_file="$new_dir_path/sketch.js"
   local new_class_file="$new_dir_path/miniGameClass.js"
-  command sed -i "" "s/YourMiniGame as UserMiniGame/$class_name as UserMiniGame/" "$new_sketch_file"
-  command sed -i "" "s/YourMiniGame/$class_name/" "$new_class_file"
+  command sed -i.bak -e "s/YourMiniGame as UserMiniGame/$class_name as UserMiniGame/" -- "$new_sketch_file" && rm -- "$new_sketch_file.bak"
+  command sed -i.bak -e "s/YourMiniGame/$class_name/" -- "$new_class_file" && rm -- "$new_class_file.bak"
 }
 
 
@@ -88,7 +88,7 @@ util_new() {
 # * Looks for line exporting/declaring a class that extends MiniGame
 # * echos name of class if found
 find_class_name() {
-  local re="^export class ([A-Za-z]+) extends MiniGame \{$"
+  local re="^export class ([A-Za-z]+) extends MiniGame \{"
   while read -r line ; do 
     if [[ "$line" =~ $re ]]; then 
       echo "${BASH_REMATCH[1]}"
@@ -116,7 +116,7 @@ util_update_templates() {
     if [ "$dirSketchFile" != "$templateSketch" ]; then
       class_name="$(find_class_name "$dirClassFile")"
       command cp "$templateSketch" "$dirSketchFile"
-      command sed -i "" "s/YourMiniGame as UserMiniGame/$class_name as UserMiniGame/" "$dirSketchFile"
+      command sed -i.bak -e "s/YourMiniGame as UserMiniGame/$class_name as UserMiniGame/" -- "$dirSketchFile" && rm -- "$dirSketchFile.bak"
     fi
   done
 }
