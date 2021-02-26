@@ -9,7 +9,7 @@
 # * Create new game
 #   * with default name: ./utils.sh new
 #   * with custom name:  ./utils.sh new dadBall
-# * Update mini game sketch templates (NOT IMPLEMENTED)
+# * Update mini game sketch templates
 #   * ./utils.sh update_templates
 
 ####################################################################
@@ -25,10 +25,6 @@
 # Details
 # * name defaults to "YourMiniGame" if none provided
 # * fails if dir with same name already exists
-#
-# Usage (run in repo's root dir)
-# * Create with default name: ./utils.sh new
-# * Create with custom name: ./utils.sh new dadBall
 util_new() {
   local game_name=$1
   local dir_name
@@ -86,9 +82,43 @@ util_new() {
 }
 
 
+# Function for finding class name in a `miniGameClass.js` file
+# 
+# Details
+# * Looks for line exporting/declaring a class that extends MiniGame
+# * echos name of class if found
+find_class_name() {
+  local re="^export class ([A-Za-z]+) extends MiniGame \{$"
+  while read -r line ; do 
+    if [[ "$line" =~ $re ]]; then 
+      echo "${BASH_REMATCH[1]}"
+      exit 0
+    fi
+  done < "$1"
+}
+
+# Function for finding class name in a `miniGameClass.js` file
+#
+# Performs
+# * Copies sketch template: `./src/games/miniGameTemplate/sketch.js`
+# * Overwrites game sketches with template: `./src/games/*/sketch.js`
+# * Corrects class import in newly updated `./src/games/*/sketch.js`
 util_update_templates() {
-  echo "Not implemented yet"
-  exit 1
+  local templateSketch="./src/games/miniGameTemplate/sketch.js"
+  
+  for dir in ./src/games/*/
+  do
+    dir=${dir%*/} 
+    local dirSketchFile=$dir"/sketch.js"
+    local dirClassFile=$dir"/miniGameClass.js"
+    local class_name
+
+    if [ "$dirSketchFile" != "$templateSketch" ]; then
+      class_name="$(find_class_name "$dirClassFile")"
+      command cp "$templateSketch" "$dirSketchFile"
+      command sed -i "" "s/YourMiniGame as UserMiniGame/$class_name as UserMiniGame/" "$dirSketchFile"
+    fi
+  done
 }
 
 
