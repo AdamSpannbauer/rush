@@ -3,7 +3,7 @@
 ####################################################################
 
 # Before using
-# * Give utils.sh execution rights: chown +x ./utils.sh
+# * Give utils.sh execution rights: chmod +x ./utils.sh
 
 # Usage
 # * Create new game
