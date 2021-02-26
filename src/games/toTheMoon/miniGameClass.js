@@ -104,11 +104,19 @@ export class ToTheMoon extends MiniGame {
 
     fill(255, 0, 0, 200);
     noStroke();
+    this.drawIcon('\uf06d', 0, 0, this.rocket.iconSize * 0.3);
+    pop();
+  }
 
-    textFont(this.fontAwesome);
-    textSize(this.rocket.iconSize * 0.3);
-    textAlign(CENTER, CENTER);
-    text('\uf06d', 0, 0);
+  drawRocket() {
+    push();
+    translate(this.rocket.x, this.rocket.y);
+    rotate(this.launchAngle);
+    // rocket icon is tilted to right; correcting to make straight up
+    rotate(QUARTER_PI);
+
+    fill(200);
+    this.drawIcon(this.rocket.icon, 0, 0, this.rocket.iconSize);
     pop();
   }
 
@@ -120,6 +128,6 @@ export class ToTheMoon extends MiniGame {
     } else {
       this.drawThrust();
     }
-    this.rocket.draw();
+    this.drawRocket();
   }
 }

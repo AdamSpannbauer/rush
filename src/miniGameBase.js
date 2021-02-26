@@ -1,5 +1,6 @@
 import { Events } from './events.js';
 import { Instructions } from './instructions.js';
+import { drawIcon } from './utils.js';
 
 export class MiniGame {
   constructor({ name, instructions = 'Win the game' }) {
@@ -40,6 +41,10 @@ export class MiniGame {
     this.gameWon = false;
     this.resetTime();
     this.resetGame();
+  }
+
+  drawIcon(str, x, y, size) {
+    drawIcon(str, x, y, this.fontAwesome, size);
   }
 
   // eslint-disable-next-line class-methods-use-this

@@ -38,3 +38,12 @@ export const dashedLine = ({
     line(ax, ay, bx, by);
   }
 };
+
+export const drawIcon = (str, x, y, fontAwesome, size = 10) => {
+  push();
+  textAlign(CENTER, CENTER);
+  textFont(fontAwesome);
+  textSize(size);
+  text(str, x, y);
+  pop();
+};
