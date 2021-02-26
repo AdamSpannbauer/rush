@@ -2,7 +2,7 @@ import { MiniGame } from '../../miniGameBase.js';
 
 export class YourMiniGame extends MiniGame {
   constructor() {
-    super({ name: 'YourMiniGame Name', instructions: 'Do the thing!' });
+    super({ name: 'YourMiniGame', instructions: 'Do the thing!' });
 
     this.instructions.inputs = {
       usesMouseClick: false,
