@@ -77,7 +77,7 @@ util_new() {
   # with user provided name
   local new_sketch_file="$new_dir_path/sketch.js"
   local new_class_file="$new_dir_path/miniGameClass.js"
-  command sed -i "" "s/YourMiniGame/$class_name/" "$new_sketch_file"
+  command sed -i "" "s/YourMiniGame as UserMiniGame/$class_name as UserMiniGame/" "$new_sketch_file"
   command sed -i "" "s/YourMiniGame/$class_name/" "$new_class_file"
 }
 
