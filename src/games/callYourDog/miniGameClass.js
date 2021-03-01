@@ -18,6 +18,9 @@ export class CallYourDog extends MiniGame {
     this.dogY = height / 2;
     this.dogName = random(dogName);
 
+    this.dogNameX = width / 2;
+    this.nameArray = this.dogName.split("");
+
     this.gameStart = Date.now();
     this.resetGame();
   }
@@ -35,10 +38,18 @@ export class CallYourDog extends MiniGame {
 
   draw() {
     push();
-    text(this.dogName, this.dogX, this.dogY - height * 0.08);
-    this.drawIcon("\uf6d3", this.dogX, this.dogY, this.dogR * 2);
+    textAlign(CENTER);
+    textSize(width * 0.08);
+    let letterX = width / 2;
+    this.nameArray.forEach((letter) => {
+      let buffer = textWidth(letter) * 1.1;
+      letterX += buffer;
+      push();
 
-    this.drawIcon("\uf818", width * 0.9, height / 2, this.dogR * 2);
+      text(letter, letterX, height * 0.2);
+    });
     pop();
+    this.drawIcon("\uf6d3", this.dogX, this.dogY, this.dogR * 2);
+    this.drawIcon("\uf818", width * 0.9, height / 2, this.dogR * 2);
   }
 }
