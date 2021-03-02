@@ -1,1 +1,1 @@
-export const dogName = ["Chester", "Tonks", "Maggie", "Hammish"];
+export const dogName = ["chester", "tonks", "maggie", "hammish"];
