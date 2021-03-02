@@ -1,5 +1,5 @@
 import { MiniGame } from "../../miniGameBase.js";
-import { dogName } from "./dogName.js";
+import { dogName, trash } from "./dogAssets.js";
 
 export class CallYourDog extends MiniGame {
   constructor() {
@@ -13,72 +13,76 @@ export class CallYourDog extends MiniGame {
       usesKeyboard: true,
     };
 
-    this.keysPressed = [];
-
     this.dogR = width * 0.05;
     this.dogX = width * 0.1;
     this.dogY = height / 2;
-    this.dogName = random(dogName);
 
-    this.dogNameX = width / 2;
-    this.nameArray = this.dogName.split("");
-
-    this.gameStart = Date.now();
     this.resetGame();
   }
 
-  resetGame() {}
+  resetGame() {
+    this.userKeyInput = [];
+    this.dogName = random(dogName);
+    this.trash = random(trash);
+    this.nameArray = this.dogName.split("");
+    this.gameStart = Date.now();
+  }
+
+  checkKey() {
+    if (!this.events.keysPressed.length > 0) {
+      return;
+    }
+    let nextLetter = this.nameArray[this.userKeyInput.length];
+
+    if (this.events.keyWasPressed(nextLetter)) {
+      this.userKeyInput.push(nextLetter);
+    }
+  }
 
   drawDogName() {
     push();
     textAlign(RIGHT);
-    textSize(width * 0.08);
+    textSize(width * 0.05);
 
-    // All of this just to keep text centered
-    const midpoint = ceil(this.nameArray.length / 2);
-    const firstHalf = this.nameArray.slice(0, midpoint).join("");
-    let letterX = width / 2 - textWidth(firstHalf) * 1.05;
+    const nameHalfpoint = textWidth(this.dogName) / 2;
+    let letterX = this.dogX - nameHalfpoint;
 
     this.nameArray.forEach((letter, i) => {
       let buffer = textWidth(letter) * 1.05;
       letterX += buffer;
 
       push();
-      if (this.events.keysPressed[i] === this.nameArray[i]) {
-        fill(100, 20, 200);
+      if (this.userKeyInput[i] === this.nameArray[i]) {
+        fill(20, 255, 20);
       }
 
-      text(letter, letterX, height * 0.2);
+      text(letter, letterX, height * 0.35);
       pop();
     });
     pop();
   }
 
-  get secondsElapsed() {
-    const millisecondsElapsed = Date.now() - this.gameStart;
-    return millisecondsElapsed / 1000;
-  }
-
   update() {
     this.dogX = this.percentElapsed * width * 0.9;
+
+    if (this.userKeyInput.join("") === this.dogName) {
+      this.gameWon = true;
+      this.gameOver = true;
+    }
   }
 
   draw() {
-    // testing seeing which keys pressed I can see
-    push();
-    textAlign(RIGHT);
-    textSize(width * 0.08);
-    let letterX = width / 2;
-    this.events.keysPressed.forEach((letter) => {
-      let buffer = textWidth(letter) * 1.05;
-      letterX += buffer;
+    this.checkKey();
+    this.drawDogName();
 
-      text(letter, letterX, height * 0.8);
-    });
+    push();
+    const angle = map(sin(this.dogX * 0.01), -1, 1, QUARTER_PI, -QUARTER_PI);
+    translate(this.dogX, this.dogY);
+    rotate(angle);
+
+    this.drawIcon("\uf6d3", 0, 0, this.dogR * 2);
     pop();
 
-    this.drawDogName();
-    this.drawIcon("\uf6d3", this.dogX, this.dogY, this.dogR * 2);
-    this.drawIcon("\uf818", width * 0.9, height / 2, this.dogR * 2);
+    this.drawIcon(this.trash, width * 0.9, height / 2, this.dogR * 2);
   }
 }
