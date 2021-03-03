@@ -14,7 +14,7 @@ export class CallYourDog extends MiniGame {
     };
 
     this.dogR = width * 0.05;
-    this.dogX = width * 0.1;
+    this.dogX = width * 0.9;
     this.dogY = height / 2;
 
     this.resetGame();
@@ -63,7 +63,7 @@ export class CallYourDog extends MiniGame {
   }
 
   update() {
-    this.dogX = this.percentElapsed * width * 0.9;
+    this.dogX = width - this.percentElapsed * width * 0.9;
 
     if (this.userKeyInput.join("") === this.dogName) {
       this.gameWon = true;
@@ -76,13 +76,20 @@ export class CallYourDog extends MiniGame {
     this.drawDogName();
 
     push();
-    const angle = map(sin(this.dogX * 0.01), -1, 1, QUARTER_PI, -QUARTER_PI);
+    const angle = map(
+      sin(this.dogX * 0.05),
+      -1,
+      1,
+      QUARTER_PI / 4,
+      -QUARTER_PI / 4
+    );
     translate(this.dogX, this.dogY);
     rotate(angle);
+    scale(-1, 1);
 
     this.drawIcon("\uf6d3", 0, 0, this.dogR * 2);
     pop();
 
-    this.drawIcon(this.trash, width * 0.9, height / 2, this.dogR * 2);
+    this.drawIcon(this.trash, width * 0.1, height / 2, this.dogR * 2);
   }
 }

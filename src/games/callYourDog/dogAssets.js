@@ -1,16 +1,14 @@
 export const dogName = [
-  "Chester",
-  "Tonks",
-  "Maggie",
-  "Hammish",
-  "Xavier",
-  "Maverick",
-  "Opollo",
-  "Ranger",
-  "Sophie",
-  "Athena",
+  "Anastasia",
+  "Augustine",
   "Penelope",
-  "Frankie",
+  "Bigglesworth",
+  "Barksalot",
+  "Genevieve",
+  "Josephine",
+  "Madelina",
+  "Nathaniel",
+  "Constantine",
 ];
 
 export const trash = [
