@@ -1,23 +1,23 @@
 export const dogName = [
-  "Anastasia",
-  "Augustine",
-  "Penelope",
-  "Bigglesworth",
-  "Barksalot",
-  "Genevieve",
-  "Josephine",
-  "Madelina",
-  "Nathaniel",
-  "Constantine",
+  'Anastasia',
+  'Augustine',
+  'Penelope',
+  'Bigglesworth',
+  'Barksalot',
+  'Genevieve',
+  'Josephine',
+  'Madelina',
+  'Nathaniel',
+  'Constantine',
 ];
 
 export const trash = [
   // Pizza
-  "\uf818",
+  '\uf818',
   // Poop
-  "\uf2fe",
+  '\uf2fe',
   // Trash Can
-  "\uf2ed",
+  '\uf2ed',
   // Hamburger
-  "\uf805",
+  '\uf805',
 ];

@@ -1,9 +1,9 @@
-import { MiniGame } from "../../miniGameBase.js";
-import { dogName, trash } from "./dogAssets.js";
+import { MiniGame } from '../../miniGameBase.js';
+import { dogName, trash } from './dogAssets.js';
 
 export class CallYourDog extends MiniGame {
   constructor() {
-    super({ name: "CallYourDog", instructions: "Call your dog!" });
+    super({ name: 'CallYourDog', instructions: 'Call your dog!' });
 
     this.instructions.inputs = {
       usesMouseClick: false,
@@ -24,7 +24,7 @@ export class CallYourDog extends MiniGame {
     this.userKeyInput = [];
     this.dogName = random(dogName);
     this.trash = random(trash);
-    this.nameArray = this.dogName.split("");
+    this.nameArray = this.dogName.split('');
     this.gameStart = Date.now();
   }
 
@@ -32,7 +32,7 @@ export class CallYourDog extends MiniGame {
     if (!this.events.keysPressed.length > 0) {
       return;
     }
-    let nextLetter = this.nameArray[this.userKeyInput.length];
+    const nextLetter = this.nameArray[this.userKeyInput.length];
 
     if (this.events.keyWasPressed(nextLetter)) {
       this.userKeyInput.push(nextLetter);
@@ -48,7 +48,7 @@ export class CallYourDog extends MiniGame {
     let letterX = this.dogX - nameHalfpoint;
 
     this.nameArray.forEach((letter, i) => {
-      let buffer = textWidth(letter) * 1.05;
+      const buffer = textWidth(letter) * 1.05;
       letterX += buffer;
 
       push();
@@ -65,7 +65,7 @@ export class CallYourDog extends MiniGame {
   update() {
     this.dogX = width - this.percentElapsed * width * 0.9;
 
-    if (this.userKeyInput.join("") === this.dogName) {
+    if (this.userKeyInput.join('') === this.dogName) {
       this.gameWon = true;
       this.gameOver = true;
     }
@@ -81,13 +81,13 @@ export class CallYourDog extends MiniGame {
       -1,
       1,
       QUARTER_PI / 4,
-      -QUARTER_PI / 4
+      -QUARTER_PI / 4,
     );
     translate(this.dogX, this.dogY);
     rotate(angle);
     scale(-1, 1);
 
-    this.drawIcon("\uf6d3", 0, 0, this.dogR * 2);
+    this.drawIcon('\uf6d3', 0, 0, this.dogR * 2);
     pop();
 
     this.drawIcon(this.trash, width * 0.1, height / 2, this.dogR * 2);
