@@ -7,6 +7,7 @@ import { StackEm } from './games/stackEm/miniGameClass.js';
 import { WaterGunRace } from './games/waterGunRace/miniGameClass.js';
 import { GolfPutt } from './games/golfPutt/miniGameClass.js';
 import { ToTheMoon } from './games/toTheMoon/miniGameClass.js';
+import { CallYourDog } from './games/callYourDog/miniGameClass.js';
 
 export const GAMES_LIST = [
   WaterGunRace,
@@ -18,4 +19,5 @@ export const GAMES_LIST = [
   StackEm,
   GolfPutt,
   ToTheMoon,
+  CallYourDog,
 ];
