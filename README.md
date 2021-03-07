@@ -2,25 +2,30 @@
 
 An in browser mini-game rush style game with a focus on open source collaboration.
 
-## Steps to add a minigame
+## How to contribute
 
-### Getting started
+### Initial setup
 
 1. Fork this repo.
 2. Clone your fork of the repo to have a local copy.
 3. `cd` into the cloned repo directory to begin development.
 4. Run `npm install -D` to install the dev dependencies of the project ( `eslint` and style guide)
-5. Make a copy of the [`src/games/miniGameTemplate`](src/games/miniGameTemplate) directory and place this copy in the `src/games` directory.
-6. Rename the resulting directory to reflect your minigame.
-7. Rename the class in `src/game/<yourMiniGameName>/miniGameClass.js` to reflect your minigame.
-8. Rename the import in `src/game/<yourMiniGameName>/sketch.js` for testing (use the same name from step 3 and avoid any further edits of `sketch.js`).
-9. Fill out the arguments in the call to `super()` in `src/game/<yourMiniGameName>/miniGameClass.js`
-   - `name` - the name of your minigame (might appear in menus etc)
-   - `instructions` - the instructions that will flash on the screen before your game starts (please be brief)
+5. Run `chmod +x ./utils.sh` to give execution rights to some utilities for managing mini game files
 
-### Developing your minigame
+### Developing a mini game
 
-- DO NOT change anything in `sketch.js`
+#### Setup your mini game's files
+
+- Run `./utils.sh new <YourMiniGameName>` (requires `./utils.sh` to have execution rights; see step 5 in Initial setup)
+  1.  Replace `<YourMiniGameName>` with your game's name. The name should contain no spaces or symbols and use either camelCase or PascalCase.
+  2.  Fill out the arguments in the call to `super()` in `src/game/<yourMiniGameName>/miniGameClass.js`
+      - `name` - the name of your minigame (might appear in menus etc)
+      - `instructions` - the instructions that will flash on the screen before your game starts (please be brief)
+  3.  Fill out the user input(s) that your game requires by setting the respective `this.instructions.inputs` flags to `true`
+
+#### Developing your minigame
+
+- **DO NOT change anything in `sketch.js`**
   - Your minigame will be integrated into the arcade by importing the class from `src/game/<yourMiniGameName>/miniGameClass.js`. Your changes in `sketch.js` will not be imported into the overall minigame rush gameplay. Any changes you make in `sketch.js` will not have any effect on the gameplay once the game is integrated.
 - Methods and attributes that are inherited from `MiniGame`
   - **Must** overwritte
@@ -61,14 +66,18 @@ An in browser mini-game rush style game with a focus on open source collaboratio
       - `this.events.keysPressed` - holds an array of strings listing the keys pressed this frame
       - `this.events.keysReleased` - holds an array of strings listing the keys released this frame
 
-- For testing
-  - Start your server in the `src` directory and navigate to your game's directory (i.e. after starting the server in `src` you might navigate to `localhost:8000/games/memoryGame/` if you were testing the game in the `memoryGame` directory).
+#### Testing your minigame
 
-### Finishing up
+- Start a server in the `src` directory
+- Open up a web browser and navigate to your game's directory
+  - For example, if testing a game in the `memoryGame` directory you might navigate to `localhost:8000/games/memoryGame/`.
 
-1. Add your mini game to the imports in [`src/gamesList.js`](src/gamesList.js).
-2. Add the newly imported class into the `GAMES_LIST` array.
-3. Test the game was integrated as expected.
-   - Serve the game from the root directory of the repo
+#### Finishing up
+
+1. Add your mini game to the games list
+   - Add your mini game to the imports in [`src/gamesList.js`](src/gamesList.js).
+   - Add the newly imported class into the `GAMES_LIST` array in [`src/gamesList.js`](src/gamesList.js).
+2. Test the game was integrated as expected.
+   - Start a server in the root of the repo's directory
    - Ensure the game eventually appears in the overall game and that it behaves as expected.
-4. Open up a pull request for review
+3. Open up a pull request for review
